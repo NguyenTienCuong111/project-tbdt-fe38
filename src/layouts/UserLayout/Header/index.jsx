@@ -1,9 +1,9 @@
-import { Dropdown } from 'antd'
-import { Link } from 'react-router-dom'
+import { Dropdown } from "antd";
+import { Link } from "react-router-dom";
 
-import { ROUTES } from 'constants/routes'
+import { ROUTES } from "constants/routes";
 
-import * as S from './styles'
+import * as S from "./styles";
 
 function Header() {
   return (
@@ -14,25 +14,25 @@ function Header() {
           menu={{
             items: [
               {
-                key: '1',
+                key: "1",
                 label: <Link to={ROUTES.ADMIN.DASHBOARD}>Dashboard</Link>,
               },
               {
-                key: '2',
-                label: 'My profile',
+                key: "2",
+                label: "My profile",
               },
               {
-                key: '3',
-                label: 'Logout',
+                key: "3",
+                label: "Logout",
               },
             ],
           }}
         >
-          <div>Avatar</div>
+          <div>User</div>
         </Dropdown>
       </S.HeaderContainer>
     </S.HeaderWrapper>
-  )
+  );
 }
 
-export default Header
+export default Header;

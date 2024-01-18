@@ -36,6 +36,74 @@
       "name": "iPhone 13",
       "price": 12000000,
       "categoryId": 1
+    },
+    {
+      "id": 8,
+      "name": "iPhone 13",
+      "price": 17000000,
+      "categoryId": 1
+    },
+    {
+      "id": 9,
+      "name": "iPhone 14 Pro Max",
+      "price": 26000000,
+      "categoryId": 1
+    },
+    {
+      "id": 10,
+      "name": "Xiaomi Redmi Note 13 Pro+ 5G",
+      "price": 10600000,
+      "categoryId": 3
+    },
+    {
+      "id": 10,
+      "name": "OPPO Reno 11 5G",
+      "price": 11000000,
+      "categoryId": 4
+    },
+    {
+      "id": 11,
+      "name": "Samsung Galaxy S24",
+      "price": 22000000,
+      "categoryId": 2
+    },
+    {
+      "id": 12,
+      "name": "Samsung Galaxy S24 Plus",
+      "price": 24000000,
+      "categoryId": 2
+    },
+    {
+      "id": 13,
+      "name": "OPPO Find N3 5G",
+      "price": 43000000,
+      "categoryId": 4
+    }
+  ],
+  "products_laptop": [
+    {
+      "id": 1,
+      "name": "Macbook i11",
+      "price": 25000000,
+      "category2Id": 1
+    },
+    {
+      "id": 2,
+      "name": "Laptop Dell",
+      "price": 20000000,
+      "category2Id": 3
+    },
+    {
+      "id": 4,
+      "name": "Laptop ASUS",
+      "price": 15000000,
+      "category2Id": 2
+    },
+    {
+      "id": 5,
+      "name": "Macbook i12",
+      "price": 18000000,
+      "category2Id": 1
     }
   ],
   "categories": [
@@ -50,6 +118,24 @@
     {
       "id": 3,
       "name": "Xiaomi"
+    },
+    {
+      "id": 4,
+      "name": "OPPO"
+    }
+  ],
+  "categories2": [
+    {
+      "id": 1,
+      "name": "Macbook"
+    },
+    {
+      "id": 2,
+      "name": "Asus"
+    },
+    {
+      "id": 3,
+      "name": "Dell"
     }
   ],
   "tasks": []

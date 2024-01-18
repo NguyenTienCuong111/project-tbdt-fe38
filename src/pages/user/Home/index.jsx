@@ -1,28 +1,30 @@
-import { useState, useEffect, useMemo } from 'react'
-import { Row, Col, Card, Checkbox } from 'antd'
-import { Link, generatePath } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useState, useEffect, useMemo } from "react";
+import { Row, Col, Card, Checkbox, Dropdown } from "antd";
+import { PhoneOutlined, DownOutlined, LaptopOutlined } from "@ant-design/icons";
+import { Link, generatePath } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-import { getProductListRequest } from '../../../redux/slicers/product.slice'
-import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
-import { ROUTES } from 'constants/routes'
+import { getProductListRequest } from "../../../redux/slicers/product.slice";
+import { getCategoryListRequest } from "../../../redux/slicers/category.slice";
+import { ROUTES } from "constants/routes";
 
-import * as S from './styles'
+import * as S from "./styles";
 
 function HomePage() {
-  const { productList } = useSelector((state) => state.product)
-  const { categoryList } = useSelector((state) => state.category)
-
-  const dispatch = useDispatch()
+  const { productList } = useSelector((state) => state.product);
+  const { categoryList } = useSelector((state) => state.category);
+  const [isShowCB, setIsShowCB] = useState(true);
+  const [isShowCBLT, setIsShowCBLT] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductListRequest())
-    dispatch(getCategoryListRequest())
-  }, [])
+    dispatch(getProductListRequest());
+    dispatch(getCategoryListRequest());
+  }, []);
 
   const handleChangeCategory = (values) => {
-    dispatch(getProductListRequest({ categoryId: values }))
-  }
+    dispatch(getProductListRequest({ categoryId: values }));
+  };
 
   const renderCategoryItems = useMemo(() => {
     return categoryList.data.map((item, index) => {
@@ -30,9 +32,9 @@ function HomePage() {
         <Checkbox key={item.id} value={item.id}>
           {item.name}
         </Checkbox>
-      )
-    })
-  }, [categoryList.data])
+      );
+    });
+  }, [categoryList.data]);
 
   const renderProductItems = useMemo(() => {
     return productList.data.map((item, index) => {
@@ -44,18 +46,53 @@ function HomePage() {
             </Card>
           </Link>
         </Col>
-      )
-    })
-  }, [productList.data])
+      );
+    });
+  }, [productList.data]);
 
   return (
     <S.HomeWrapper>
       <Row gutter={[16, 16]}>
         <Col span={8}>
           <Card title="Bộ lọc" size="small">
-            <Checkbox.Group onChange={(values) => handleChangeCategory(values)}>
-              {renderCategoryItems}
-            </Checkbox.Group>
+            <S.DeviceWrapper>
+              <S.DevicePhoneWrappe
+                onClick={() => {
+                  setIsShowCB(!isShowCB);
+                }}
+              >
+                <PhoneOutlined />
+                Điện thoại
+                <DownOutlined style={{ marginLeft: 250 }} />
+              </S.DevicePhoneWrappe>
+              {isShowCB && (
+                <S.CheckBoxWrapper>
+                  <Checkbox.Group
+                    onChange={(values) => handleChangeCategory(values)}
+                  >
+                    <li>{renderCategoryItems}</li>
+                  </Checkbox.Group>
+                </S.CheckBoxWrapper>
+              )}
+              <S.DevicePhoneWrappe
+                onClick={() => {
+                  setIsShowCBLT(!isShowCBLT);
+                }}
+              >
+                <LaptopOutlined />
+                LapTop
+                <DownOutlined style={{ marginLeft: 270 }} />
+              </S.DevicePhoneWrappe>
+              {isShowCBLT && (
+                <S.CheckBoxWrapper>
+                  <Checkbox.Group
+                    onChange={(values) => handleChangeCategory(values)}
+                  >
+                    <li>{renderCategoryItems}</li>
+                  </Checkbox.Group>
+                </S.CheckBoxWrapper>
+              )}
+            </S.DeviceWrapper>
           </Card>
         </Col>
         <Col span={16}>
@@ -63,7 +100,7 @@ function HomePage() {
         </Col>
       </Row>
     </S.HomeWrapper>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

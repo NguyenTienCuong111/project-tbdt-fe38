@@ -1,41 +1,66 @@
 import { useState, useEffect, useMemo } from "react";
-import { Row, Col, Card, Checkbox, Dropdown } from "antd";
+import { Row, Col, Card, Checkbox, Flex, Button, Input, Select } from "antd";
 import { PhoneOutlined, DownOutlined, LaptopOutlined } from "@ant-design/icons";
 import { Link, generatePath } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getProductListRequest } from "../../../redux/slicers/product.slice";
-
-import { getProduct2ListRequest } from "../../../redux/slicers/product2.slice";
 import { getCategoryListRequest } from "../../../redux/slicers/category.slice";
-import { getCategory2ListRequest } from "../../../redux/slicers/category2.slice";
+import { getTypeListRequest } from "../../../redux/slicers/type.slice";
 import { ROUTES } from "constants/routes";
+import { PRODUCT_LIMIT } from "constants/paging";
 
 import * as S from "./styles";
 
 function HomePage() {
-  const { productList } = useSelector((state) => state.product);
-  const { product2List } = useSelector((state) => state.product2);
-  const { categoryList } = useSelector((state) => state.category);
-  const { category2List } = useSelector((state) => state.category2);
   const [isShowCB, setIsShowCB] = useState(true);
   const [isShowCBLT, setIsShowCBLT] = useState(true);
+  const [filterParams, setFilterParams] = useState({
+    categoryId: [],
+    typeId: [],
+    priceOrder: undefined,
+    keyword: "",
+  });
+
+  const { productList } = useSelector((state) => state.product);
+  const { categoryList } = useSelector((state) => state.category);
+  const { typeList } = useSelector((state) => state.type);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductListRequest());
-    dispatch(getProduct2ListRequest());
+    dispatch(
+      getProductListRequest({
+        ...filterParams,
+        page: 1,
+        limit: PRODUCT_LIMIT,
+      })
+    );
     dispatch(getCategoryListRequest());
-    dispatch(getCategory2ListRequest());
+    dispatch(getTypeListRequest());
   }, []);
 
-  const handleChangeCategory = (values) => {
-    dispatch(getProductListRequest({ categoryId: values }));
+  const handleFilter = (key, value) => {
+    setFilterParams({ ...filterParams, [key]: value });
+    dispatch(
+      getProductListRequest({
+        ...filterParams,
+        [key]: value,
+        page: 1,
+        limit: PRODUCT_LIMIT,
+      })
+    );
   };
-  const handleChangeCategory2 = (values) => {
-    dispatch(getProduct2ListRequest({ category2Id: values }));
+  const handleShowMore = () => {
+    dispatch(
+      getProductListRequest({
+        ...filterParams,
+        page: productList.meta.page + 1,
+        limit: PRODUCT_LIMIT,
+        more: true,
+      })
+    );
   };
-
   const renderCategoryItems = useMemo(() => {
     return categoryList.data.map((item, index) => {
       return (
@@ -45,15 +70,16 @@ function HomePage() {
       );
     });
   }, [categoryList.data]);
-  const renderCategory2Items = useMemo(() => {
-    return category2List.data.map((item, index) => {
+
+  const renderTypeItems = useMemo(() => {
+    return typeList.data.map((item, index) => {
       return (
         <Checkbox key={item.id} value={item.id}>
           {item.name}
         </Checkbox>
       );
     });
-  }, [category2List.data]);
+  }, [typeList.data]);
 
   const renderProductItems = useMemo(() => {
     return productList.data.map((item, index) => {
@@ -61,32 +87,23 @@ function HomePage() {
         <Col lg={6} md={8} sm={12} key={index}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
             <Card size="small" title={item.name}>
-              {item.price.toLocaleString()} VND
+              <h4>{item.category.name}</h4>
+              <h3>{item.price.toLocaleString()} VND</h3>
             </Card>
           </Link>
         </Col>
       );
     });
   }, [productList.data]);
-  const renderProduct2Items = useMemo(() => {
-    return product2List.data.map((item, index) => {
-      return (
-        <Col lg={6} md={8} sm={12} key={index}>
-          <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
-            <Card size="small" title={item.name}>
-              {item.price.toLocaleString()} VND
-            </Card>
-          </Link>
-        </Col>
-      );
-    });
-  }, [product2List.data]);
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
 
   return (
     <S.HomeWrapper>
       <Row gutter={[16, 16]}>
         <Col span={8}>
-          <Card title="Bộ lọc" size="small">
+          <Card title="Danh sách sản phẩm" size="small">
             <S.DeviceWrapper>
               <S.DevicePhoneWrappe
                 onClick={() => {
@@ -100,9 +117,9 @@ function HomePage() {
               {isShowCB && (
                 <S.CheckBoxWrapper>
                   <Checkbox.Group
-                    onChange={(values) => handleChangeCategory(values)}
+                    onChange={(values) => handleFilter("categoryId", values)}
                   >
-                    <li>{renderCategoryItems}</li>
+                    {renderCategoryItems}
                   </Checkbox.Group>
                 </S.CheckBoxWrapper>
               )}
@@ -118,9 +135,9 @@ function HomePage() {
               {isShowCBLT && (
                 <S.CheckBoxWrapper>
                   <Checkbox.Group
-                    onChange={(values) => handleChangeCategory2(values)}
+                    onChange={(values) => handleFilter("typeId", values)}
                   >
-                    <li>{renderCategory2Items}</li>
+                    {renderTypeItems}
                   </Checkbox.Group>
                 </S.CheckBoxWrapper>
               )}
@@ -128,10 +145,31 @@ function HomePage() {
           </Card>
         </Col>
         <Col span={16}>
-          <Row gutter={[16, 16]}>
-            {renderProductItems}
-            {renderProduct2Items}
+          <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
+            <Col span={16}>
+              <Input
+                onChange={(e) => handleFilter("keyword", e.target.value)}
+                placeholder="Tìm kiếm"
+              />
+            </Col>
+            <Col span={8}>
+              <Select
+                onChange={(value) => handleFilter("priceOrder", value)}
+                placeholder="Sắp xếp theo"
+                allowClear
+                style={{ width: "100%" }}
+              >
+                <Select.Option value="asc">Giá tăng dần</Select.Option>
+                <Select.Option value="desc">Giá giảm dần</Select.Option>
+              </Select>
+            </Col>
           </Row>
+          <Row gutter={[16, 16]}>{renderProductItems}</Row>
+          {productList.data.length < productList.meta.total && (
+            <Flex justify="center" style={{ marginTop: 16 }}>
+              <Button onClick={() => handleShowMore()}>Hiển thị thêm</Button>
+            </Flex>
+          )}
         </Col>
       </Row>
     </S.HomeWrapper>

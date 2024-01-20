@@ -5,137 +5,129 @@
       "id": 1,
       "name": "iPhone 15",
       "price": 25000000,
-      "categoryId": 1
+      "categoryId": 1,
+      "typeId": 2
     },
     {
       "id": 2,
       "name": "Samsung Galaxy S23",
       "price": 20000000,
-      "categoryId": 2
+      "categoryId": 2,
+      "typeId": 2
     },
     {
       "id": 4,
       "name": "iPhone 14",
       "price": 15000000,
-      "categoryId": 1
+      "categoryId": 1,
+      "typeId": 2
     },
     {
       "id": 5,
       "name": "iPhone 14 Pro",
       "price": 18000000,
-      "categoryId": 1
+      "categoryId": 1,
+      "typeId": 2
     },
     {
       "id": 6,
       "name": "iPhone 15 Pro",
       "price": 30000000,
-      "categoryId": 1
+      "categoryId": 1,
+      "typeId": 2
     },
     {
       "id": 7,
       "name": "iPhone 13",
       "price": 12000000,
-      "categoryId": 1
+      "categoryId": 1,
+      "typeId": 2
     },
     {
       "id": 8,
-      "name": "iPhone 13",
-      "price": 17000000,
-      "categoryId": 1
+      "name": "Samsung Galaxy S24",
+      "price": 25000000,
+      "categoryId": 2,
+      "typeId": 2
     },
     {
       "id": 9,
-      "name": "iPhone 14 Pro Max",
-      "price": 26000000,
-      "categoryId": 1
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 35000000,
+      "categoryId": 2,
+      "typeId": 2
     },
     {
       "id": 10,
-      "name": "Xiaomi Redmi Note 13 Pro+ 5G",
-      "price": 10600000,
-      "categoryId": 3
-    },
-    {
-      "id": 10,
-      "name": "OPPO Reno 11 5G",
-      "price": 11000000,
-      "categoryId": 4
+      "name": "Xiaomi Mi 14",
+      "price": 15000000,
+      "categoryId": 3,
+      "typeId": 2
     },
     {
       "id": 11,
-      "name": "Samsung Galaxy S24",
-      "price": 22000000,
-      "categoryId": 2
+      "name": "Xiaomi Mi 13",
+      "price": 10000000,
+      "categoryId": 3,
+      "typeId": 2
     },
     {
       "id": 12,
-      "name": "Samsung Galaxy S24 Plus",
-      "price": 24000000,
-      "categoryId": 2
+      "name": "Laptop Dell M3 cục gạch",
+      "price": 100000,
+      "categoryId": 4,
+      "typeId": 1
     },
     {
       "id": 13,
-      "name": "OPPO Find N3 5G",
-      "price": 43000000,
-      "categoryId": 4
-    }
-  ],
-  "products2": [
-    {
-      "id": 1,
-      "name": "Macbook i11",
-      "price": 25000000,
-      "category2Id": 1
+      "name": "Laptop Dell M3 ",
+      "price": 150000,
+      "categoryId": 4,
+      "typeId": 1
     },
     {
-      "id": 2,
-      "name": "Laptop Dell",
-      "price": 20000000,
-      "category2Id": 3
-    },
-    {
-      "id": 4,
-      "name": "Laptop ASUS",
-      "price": 15000000,
-      "category2Id": 2
-    },
-    {
-      "id": 5,
-      "name": "Macbook i12",
-      "price": 18000000,
-      "category2Id": 1
+      "id": 14,
+      "name": "Macbook Pro M5 ",
+      "price": 550000,
+      "categoryId": 5,
+      "typeId": 1
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "Apple"
+      "name": "Apple",
+      "typeId": 2
     },
     {
       "id": 2,
-      "name": "Samsung"
+      "name": "Samsung",
+      "typeId": 2
     },
     {
       "id": 3,
-      "name": "Xiaomi"
+      "name": "Xiaomi",
+      "typeId": 2
     },
     {
       "id": 4,
-      "name": "OPPO"
+      "name": "Dell",
+      "typeId": 1
+    },
+    {
+      "id": 5,
+      "name": "Macbook",
+      "typeId": 1
     }
   ],
-  "categories2": [
+  "types": [
     {
       "id": 1,
-      "name": "Macbook"
+      "name": "Laptop"
     },
     {
       "id": 2,
-      "name": "Asus"
-    },
-    {
-      "id": 3,
-      "name": "Dell"
+      "name": "Smartphone"
     }
   ],
   "tasks": []

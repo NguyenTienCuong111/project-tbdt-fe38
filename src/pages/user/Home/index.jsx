@@ -86,18 +86,33 @@ function HomePage() {
       return (
         <Col lg={6} md={8} sm={12} key={index}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
-            <Card size="small" title={item.name}>
-              <h4>{item.category.name}</h4>
-              <h3>{item.price.toLocaleString()} VND</h3>
+            <Card
+              size="small"
+              style={{
+                width: 230,
+                height: 300,
+              }}
+              cover={
+                <img
+                  style={{
+                    width: 150,
+                    marginLeft: 40,
+                    marginTop: 10,
+                  }}
+                  alt="example"
+                  src={item.image}
+                />
+              }
+            >
+              <h3>{item.name}</h3>
+              <h4>Hãng: {item.category.name}</h4>
+              <h4>Giá: {item.price.toLocaleString()} VND</h4>
             </Card>
           </Link>
         </Col>
       );
     });
   }, [productList.data]);
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
 
   return (
     <S.HomeWrapper>
@@ -148,8 +163,9 @@ function HomePage() {
           <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
             <Col span={16}>
               <Input
+                style={{ borderRadius: 15 }}
                 onChange={(e) => handleFilter("keyword", e.target.value)}
-                placeholder="Tìm kiếm"
+                placeholder="Gõ từ khoá tìm kiếm"
               />
             </Col>
             <Col span={8}>

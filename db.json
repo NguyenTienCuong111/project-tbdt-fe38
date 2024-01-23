@@ -3,92 +3,117 @@
   "products": [
     {
       "id": 1,
-      "name": "iPhone 15",
-      "price": 25000000,
+      "name": "iPhone 15 Pro Max",
+      "price": 31900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/299033/TimerThumb/iphone-15-pro-(8).jpg",
+
       "categoryId": 1,
       "typeId": 2
     },
     {
       "id": 2,
-      "name": "Samsung Galaxy S23",
-      "price": 20000000,
+      "name": "Samsung Galaxy S23 FE 5G",
+      "price": 12500000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/306994/TimerThumb/samsung-galaxy-s23-fe-(2).jpg",
+
       "categoryId": 2,
       "typeId": 2
     },
     {
       "id": 4,
-      "name": "iPhone 14",
-      "price": 15000000,
+      "name": "iPhone 14 Pro",
+      "price": 27000000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/289691/TimerThumb/iphone-14-pro-256gb-(54).jpg",
       "categoryId": 1,
       "typeId": 2
     },
     {
       "id": 5,
-      "name": "iPhone 14 Pro",
+      "name": "iPhone 14",
       "price": 18000000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/240259/TimerThumb/iphone-14-(60).jpg",
+
       "categoryId": 1,
       "typeId": 2
     },
     {
       "id": 6,
       "name": "iPhone 15 Pro",
-      "price": 30000000,
+      "price": 27999000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/299033/TimerThumb/iphone-15-pro-(8).jpg",
+
       "categoryId": 1,
       "typeId": 2
     },
     {
       "id": 7,
       "name": "iPhone 13",
-      "price": 12000000,
+      "price": 16000000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/223602/TimerThumb/iphone-13-(70).jpg",
+
       "categoryId": 1,
       "typeId": 2
     },
     {
       "id": 8,
-      "name": "Samsung Galaxy S24",
-      "price": 25000000,
+      "name": "Samsung Galaxy S24 5G",
+      "price": 22990000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/319665/samsung-galaxy-s24-gold-thumb-600x600.jpg",
+
       "categoryId": 2,
       "typeId": 2
     },
     {
       "id": 9,
-      "name": "Samsung Galaxy S24 Ultra",
-      "price": 35000000,
+      "name": "Samsung Galaxy S24 Ultra 5G",
+      "price": 33990000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/307174/samsung-galaxy-s24-ultra-grey-thumb-600x600.jpg",
+
       "categoryId": 2,
       "typeId": 2
     },
     {
       "id": 10,
-      "name": "Xiaomi Mi 14",
-      "price": 15000000,
+      "name": "Xiaomi 13T 5G 12GB",
+      "price": 12900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/315401/TimerThumb/xiaomi-13t-12gb-(4).jpg",
+
       "categoryId": 3,
       "typeId": 2
     },
     {
       "id": 11,
-      "name": "Xiaomi Mi 13",
-      "price": 10000000,
+      "name": "Xiaomi 13 Lite 5G",
+      "price": 7900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/42/302531/TimerThumb/xiaomi-13-lite-5g-(2).jpg",
+
       "categoryId": 3,
       "typeId": 2
     },
     {
       "id": 12,
-      "name": "Laptop Dell M3 cục gạch",
-      "price": 100000,
+      "name": "Dell Inspiron 15 3530 i7 1355Uh",
+      "price": 24900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/44/314841/dell-inspiron-15-3530-i7-n3530i716w1-thumb-2-600x600.jpg",
+
       "categoryId": 4,
       "typeId": 1
     },
     {
       "id": 13,
-      "name": "Laptop Dell M3 ",
-      "price": 150000,
+      "name": "Dell Inspiron 14 T7430 i5 1335U",
+      "price": 23900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/44/314840/dell-inspiron-14-7430-i5-n7430i58w1-221023-102403-600x600.png",
+
       "categoryId": 4,
       "typeId": 1
     },
     {
       "id": 14,
-      "name": "Macbook Pro M5 ",
-      "price": 550000,
+      "name": "MacBook Pro 14 inch M3 Pro 2023 14-core GPU",
+      "price": 49900000,
+      "image": "https://cdn.tgdd.vn/Products/Images/44/318230/apple-macbook-pro-14-inch-m3-pro-2023-311023-105253-600x600.jpg",
+
       "categoryId": 5,
       "typeId": 1
     }

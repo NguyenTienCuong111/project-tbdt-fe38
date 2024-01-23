@@ -35,7 +35,10 @@ function Header() {
             ],
           }}
         >
-          <UserOutlined>User</UserOutlined>
+          <span>
+            Tiến Cường
+            <UserOutlined style={{ marginLeft: 10 }} />
+          </span>
         </Dropdown>
       </S.HeaderContainer>
     </S.HeaderWrapper>

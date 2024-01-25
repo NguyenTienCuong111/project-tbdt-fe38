@@ -49,7 +49,11 @@ function* getProductListSaga(action) {
 function* getProductDetailSaga(action) {
   try {
     const { id } = action.payload;
-    const result = yield axios.get(`http://localhost:4000/products/${id}`);
+    const result = yield axios.get(`http://localhost:4000/products/${id}`, {
+      params: {
+        _expand: "category",
+      },
+    });
     yield put(getProductDetailSuccess({ data: result.data }));
   } catch (e) {
     yield put(getProductDetailFail({ error: "Lỗi..." }));

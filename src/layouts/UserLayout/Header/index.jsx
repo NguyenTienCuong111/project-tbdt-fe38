@@ -1,6 +1,11 @@
-import { Dropdown } from "antd";
+import { Dropdown, Space, Badge, Button } from "antd";
 
-import { UserOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  ShoppingCartOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
 
 import { useMemo, useState } from "react";
 import { Input } from "antd";
@@ -9,10 +14,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import qs from "qs";
 import { ROUTES } from "constants/routes";
+import { logoutRequest } from "../../../redux/slicers/auth.slice";
 
 import * as S from "./styles";
 
 function Header() {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+  const { cartList } = useSelector((state) => state.cart);
   const { search } = useLocation();
   const searchParams = useMemo(() => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
@@ -57,30 +66,55 @@ function Header() {
           onKeyDown={handleKeyDown}
           value={searchQuery}
           placeholder="Gõ từ khoá tìm kiếm"
+          allowClear
         />
-        <Dropdown
-          menu={{
-            items: [
-              {
-                key: "1",
-                label: <Link to={ROUTES.ADMIN.DASHBOARD}>Dashboard</Link>,
-              },
-              {
-                key: "2",
-                label: "My profile",
-              },
-              {
-                key: "3",
-                label: "Logout",
-              },
-            ],
-          }}
-        >
-          <span>
-            Tiến Cường
-            <UserOutlined style={{ marginLeft: 10 }} />
-          </span>
-        </Dropdown>
+
+        {userInfo.data.id ? (
+          <Space>
+            <Link to={ROUTES.USER.CART}>
+              <Badge count={cartList.length}>
+                <ShoppingCartOutlined
+                  style={{ fontSize: 24, color: "#414141" }}
+                />
+              </Badge>
+            </Link>
+            <Dropdown
+              menu={{
+                items: [
+                  {
+                    key: "1",
+                    label: "Dashboard",
+                    icon: <UserOutlined />,
+                    onClick: () => navigate(ROUTES.ADMIN.DASHBOARD),
+                    style: {
+                      display:
+                        userInfo.data.role === "admin" ? "block" : "none",
+                    },
+                  },
+                  {
+                    key: "2",
+                    label: "Thông tin cá nhân",
+                    icon: <UserOutlined />,
+                    onClick: () => navigate(ROUTES.USER.PROFILE),
+                  },
+                  {
+                    key: "3",
+                    label: "Đăng xuất",
+                    onClick: () => dispatch(logoutRequest()),
+                    icon: <LogoutOutlined />,
+                  },
+                ],
+              }}
+            >
+              <span>
+                {userInfo.data.fullName}
+                <UserOutlined style={{ marginLeft: 10 }} />
+              </span>
+            </Dropdown>
+          </Space>
+        ) : (
+          <Button onClick={() => navigate(ROUTES.LOGIN)}>Đăng nhập</Button>
+        )}
       </S.HeaderContainer>
     </S.HeaderWrapper>
   );

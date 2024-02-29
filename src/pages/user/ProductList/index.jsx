@@ -23,7 +23,7 @@ function ProductListPage() {
         : [],
       typeId: params.typeId ? params.typeId.map((item) => parseInt(item)) : [],
       priceOrder: params.priceOrder,
-      keyword: params.keyword || '',
+      keyword: params.keyword || "",
     };
   }, [search]);
 
@@ -134,7 +134,7 @@ function ProductListPage() {
                 }}
               >
                 <PhoneOutlined />
-                Điện thoại
+                Hãng
                 <DownOutlined style={{ marginLeft: 250 }} />
               </S.DevicePhoneWrappe>
               {isShowCB && (
@@ -157,7 +157,7 @@ function ProductListPage() {
                 }}
               >
                 <LaptopOutlined />
-                LapTop
+                Loại
                 <DownOutlined style={{ marginLeft: 270 }} />
               </S.DevicePhoneWrappe>
               {isShowCBLT && (

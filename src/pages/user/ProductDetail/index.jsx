@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import React from "react";
 import Slider from "react-slick";
+import "react-quill/dist/quill.snow.css";
 
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -235,7 +236,11 @@ const ProductDetailPage = () => {
         </Col>
         <Col xs={24} md={8}>
           <Card size="small" title="Cấu hình" bordered={false}>
-            Cấu hình
+            <div
+              dangerouslySetInnerHTML={{
+                __html: productDetail.data.configuration,
+              }}
+            />
           </Card>
         </Col>
       </Row>

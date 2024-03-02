@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ConfigProvider } from "antd";
@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 
 import AdminLayout from "layouts/AdminLayout";
 import UserLayout from "layouts/UserLayout";
+import ProfileLayout from "layouts/ProfileLayout";
 
 import HomePage from "pages/user/Home";
 import ProductListPage from "pages/user/ProductList";
@@ -14,6 +15,9 @@ import ProductDetailPage from "pages/user/ProductDetail";
 import ToDoListPage from "pages/user/ToDoList";
 import CartPage from "pages/user/Cart";
 import CheckoutPage from "pages/user/Checkout";
+import UserInfoPage from "pages/user/UserInfo";
+import OrderHistoryPage from "pages/user/OrderHistory";
+import ChangePasswordPage from "pages/user/ChangePassword";
 import PaymentSuccessPage from "pages/user/PaymentSuccess";
 
 import DashboardPage from "pages/admin/Dashboard";
@@ -66,6 +70,21 @@ function App() {
             path={ROUTES.USER.PAYMENTSUCCESS}
             element={<PaymentSuccessPage />}
           />
+          <Route element={<ProfileLayout />}>
+            <Route
+              path={ROUTES.USER.PROFILE}
+              element={<Navigate to={ROUTES.USER.USER_INFO} />}
+            />
+            <Route path={ROUTES.USER.USER_INFO} element={<UserInfoPage />} />
+            <Route
+              path={ROUTES.USER.ORDER_HISTORY}
+              element={<OrderHistoryPage />}
+            />
+            <Route
+              path={ROUTES.USER.CHANGE_PASSWORD}
+              element={<ChangePasswordPage />}
+            />
+          </Route>
         </Route>
         <Route element={<AdminLayout />}>
           <Route path={ROUTES.ADMIN.DASHBOARD} element={<DashboardPage />} />

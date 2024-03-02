@@ -12,6 +12,12 @@ import {
   getUserInfoRequest,
   getUserInfoSuccess,
   getUserInfoFail,
+  updateUserInfoRequest,
+  updateUserInfoSuccess,
+  updateUserInfoFail,
+  changeAvatarRequest,
+  changeAvatarSuccess,
+  changeAvatarFail,
 } from "../slicers/auth.slice";
 
 function* registerSaga(action) {
@@ -50,7 +56,7 @@ function* loginSaga(action) {
   }
 }
 
-function* getUserInfo(action) {
+function* getUserInfoSaga(action) {
   try {
     const { id } = action.payload;
     const result = yield axios.get(`http://localhost:4000/users/${id}`);
@@ -60,8 +66,36 @@ function* getUserInfo(action) {
   }
 }
 
+function* updateUserInfoSaga(action) {
+  try {
+    const { id, data } = action.payload;
+    const result = yield axios.patch(`http://localhost:4000/users/${id}`, data);
+    yield put(updateUserInfoSuccess({ data: result.data }));
+    notification.success({
+      message: "Cập nhật thành công",
+    });
+  } catch (e) {
+    yield put(updateUserInfoFail({ error: "Lỗi..." }));
+  }
+}
+
+function* changeAvatarSaga(action) {
+  try {
+    const { id, data } = action.payload;
+    const result = yield axios.patch(`http://localhost:4000/users/${id}`, data);
+    yield put(changeAvatarSuccess({ data: result.data }));
+    notification.success({
+      message: "Cập nhật thành công",
+    });
+  } catch (e) {
+    yield put(changeAvatarFail({ error: "Lỗi..." }));
+  }
+}
+
 export default function* authSaga() {
   yield takeEvery(registerRequest, registerSaga);
   yield takeEvery(loginRequest, loginSaga);
-  yield takeEvery(getUserInfoRequest, getUserInfo);
+  yield takeEvery(getUserInfoRequest, getUserInfoSaga);
+  yield takeEvery(updateUserInfoRequest, updateUserInfoSaga);
+  yield takeEvery(changeAvatarRequest, changeAvatarSaga);
 }

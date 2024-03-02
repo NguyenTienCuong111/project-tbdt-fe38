@@ -6,6 +6,8 @@ import productReducer from "./redux/slicers/product.slice";
 import cartReducer from "./redux/slicers/cart.slice";
 import locationReducer from "./redux/slicers/location.slice";
 import orderReducer from "./redux/slicers/order.slice";
+import reviewReducer from "./redux/slicers/review.slice";
+import favoriteReducer from "./redux/slicers/favorite.slice";
 
 import categoryReducer from "./redux/slicers/category.slice";
 import typeReducer from "./redux/slicers/type.slice";
@@ -24,6 +26,8 @@ const store = configureStore({
     cart: cartReducer,
     location: locationReducer,
     order: orderReducer,
+    review: reviewReducer,
+    favorite: favoriteReducer,
     type: typeReducer,
     task: taskReducer,
     common: commonReducer,

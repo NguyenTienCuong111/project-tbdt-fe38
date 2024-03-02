@@ -14,6 +14,14 @@ const initialState = {
     loading: false,
     error: null,
   },
+  updateUserInfoData: {
+    loading: false,
+    error: null,
+  },
+  changeAvatarData: {
+    loading: false,
+    error: null,
+  },
 };
 
 export const authSlice = createSlice({
@@ -72,6 +80,38 @@ export const authSlice = createSlice({
       state.userInfo.error = error;
       state.userInfo.loading = false;
     },
+
+    // updateUserInfo
+    updateUserInfoRequest: (state) => {
+      state.updateUserInfoData.loading = true;
+      state.updateUserInfoData.error = null;
+    },
+    updateUserInfoSuccess: (state, action) => {
+      const { data } = action.payload;
+      state.updateUserInfoData.loading = false;
+      state.userInfo.data = data;
+    },
+    updateUserInfoFail: (state, action) => {
+      const { error } = action.payload;
+      state.updateUserInfoData.error = error;
+      state.updateUserInfoData.loading = false;
+    },
+
+    // changeAvatar
+    changeAvatarRequest: (state) => {
+      state.changeAvatarData.loading = true;
+      state.changeAvatarData.error = null;
+    },
+    changeAvatarSuccess: (state, action) => {
+      const { data } = action.payload;
+      state.changeAvatarData.loading = false;
+      state.userInfo.data = data;
+    },
+    changeAvatarFail: (state, action) => {
+      const { error } = action.payload;
+      state.changeAvatarData.error = error;
+      state.changeAvatarData.loading = false;
+    },
   },
 });
 
@@ -86,6 +126,12 @@ export const {
   getUserInfoRequest,
   getUserInfoSuccess,
   getUserInfoFail,
+  updateUserInfoRequest,
+  updateUserInfoSuccess,
+  updateUserInfoFail,
+  changeAvatarRequest,
+  changeAvatarSuccess,
+  changeAvatarFail,
 } = authSlice.actions;
 
 export default authSlice.reducer;

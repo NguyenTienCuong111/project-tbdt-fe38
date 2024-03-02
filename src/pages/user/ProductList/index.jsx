@@ -1,6 +1,23 @@
 import { useState, useEffect, useMemo } from "react";
-import { Row, Col, Card, Checkbox, Flex, Button, Input, Select } from "antd";
-import { PhoneOutlined, DownOutlined, LaptopOutlined } from "@ant-design/icons";
+import {
+  Row,
+  Col,
+  Card,
+  Checkbox,
+  Flex,
+  Button,
+  Input,
+  Select,
+  Breadcrumb,
+  Space,
+  Rate
+} from "antd";
+import {
+  PhoneOutlined,
+  DownOutlined,
+  LaptopOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import qs from "qs";
@@ -35,12 +52,14 @@ function ProductListPage() {
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
   const { typeList } = useSelector((state) => state.type);
+  const { reviewList } = useSelector((state) => state.review);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategoryListRequest());
     dispatch(getTypeListRequest());
+    
   }, []);
 
   useEffect(() => {
@@ -68,6 +87,13 @@ function ProductListPage() {
       })
     );
   };
+  const productRate = useMemo(() => {
+    const totalRate = reviewList.data.reduce(
+      (total, item) => total + item.rate,
+      0
+    );
+    return reviewList.data.length ? totalRate / reviewList.data.length : 0;
+  }, [reviewList.data]);
 
   const renderCategoryItems = useMemo(() => {
     return categoryList.data.map((item, index) => {
@@ -115,6 +141,7 @@ function ProductListPage() {
               <h3>{item.name}</h3>
               <h4>Hãng: {item.category.name}</h4>
               <h4>Giá: {item.price.toLocaleString()} VND</h4>
+              <Rate value={productRate} allowHalf disabled />
             </Card>
           </Link>
         </Col>
@@ -124,7 +151,21 @@ function ProductListPage() {
 
   return (
     <S.ProductListWrapper>
-      <Row gutter={[16, 16]}>
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to={ROUTES.USER.HOME}>
+                <Space>
+                  <HomeOutlined />
+                  <span>Trang chủ</span>
+                </Space>
+              </Link>
+            ),
+          },
+        ]}
+      />
+      <Row style={{ marginTop: 20 }} gutter={[16, 16]}>
         <Col span={8}>
           <Card title="Danh sách sản phẩm" size="small">
             <S.DeviceWrapper>

@@ -2,6 +2,9 @@ import { takeEvery, put } from "redux-saga/effects";
 import axios from "axios";
 
 import {
+  getFavoriteListRequest,
+  getFavoriteListSuccess,
+  getFavoriteListFailure,
   favoriteProductRequest,
   favoriteProductSuccess,
   favoriteProductFailure,
@@ -9,6 +12,22 @@ import {
   unFavoriteProductSuccess,
   unFavoriteProductFailure,
 } from "../slicers/favorite.slice";
+function* getFavoriteListSaga(action) {
+  try {
+    const { userId } = action.payload;
+    const result = yield axios.get("http://localhost:4000/favorites", {
+      params: {
+        userId: userId,
+        _expand: "product",
+        _sort: "createdAt",
+        _order: "desc",
+      },
+    });
+    yield put(getFavoriteListSuccess({ data: result.data }));
+  } catch (e) {
+    yield put(getFavoriteListFailure({ error: "Lỗi..." }));
+  }
+}
 
 function* favoriteProductSaga(action) {
   try {
@@ -33,4 +52,5 @@ function* unFavoriteProductSaga(action) {
 export default function* favoriteSaga() {
   yield takeEvery(favoriteProductRequest, favoriteProductSaga);
   yield takeEvery(unFavoriteProductRequest, unFavoriteProductSaga);
+  yield takeEvery(getFavoriteListRequest, getFavoriteListSaga);
 }

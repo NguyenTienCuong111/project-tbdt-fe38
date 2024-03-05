@@ -53,6 +53,18 @@ function CartPage() {
 
   const tableColumn = [
     {
+      title: "Hình ảnh",
+      dataIndex: "image",
+      key: "image",
+      render: (text) => (
+        <img
+          src={text}
+          alt=""
+          style={{ width: "80px", height: "100px" }}
+        />
+      ),
+    },
+    {
       title: "Tên sản phẩm",
       dataIndex: "name",
       key: "name",

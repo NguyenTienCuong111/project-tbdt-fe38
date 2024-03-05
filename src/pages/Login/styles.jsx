@@ -28,7 +28,7 @@ export const LoginLogoImage = styled.img`
 export const LoginText = styled.h1`
   text-align: center;
   padding: 20px 0px;
-  color: #f18585;
+  color: #f6f627;
 `;
 export const LoginBanner = styled.img`
   padding: 20px;

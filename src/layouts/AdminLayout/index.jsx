@@ -1,5 +1,8 @@
 import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import React from "react";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -18,7 +21,22 @@ function AdminLayout() {
   const accessToken = localStorage.getItem("accessToken");
 
   if (accessToken && userInfo.loading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <Spin
+          indicator={
+            <LoadingOutlined
+              style={{
+                fontSize: 100,
+                textAlign: "center",
+                marginTop: "50px",
+              }}
+              spin
+            />
+          }
+        />
+      </div>
+    );
   } else if (userInfo.data.role !== "admin") {
     return <Navigate to={ROUTES.USER.HOME} />;
   }

@@ -106,10 +106,14 @@ function Header() {
                 ],
               }}
             >
-              <span>
-                {userInfo.data.fullName}
-                <UserOutlined style={{ marginLeft: 10 }} />
-              </span>
+              <Space>
+                <span>{userInfo.data.fullName}</span>
+                <img
+                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                  src={userInfo.data.avatar}
+                  alt=""
+                />
+              </Space>
             </Dropdown>
           </Space>
         ) : (

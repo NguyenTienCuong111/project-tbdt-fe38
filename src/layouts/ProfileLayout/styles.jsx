@@ -103,17 +103,17 @@ export const ProfileMenuItem = styled.div`
   transition: all 0.2s;
 
   &:hover {
-    background-color: #b0ffff;
+    background-color: #ffff53;
   }
 
   ${({ active }) =>
     active &&
     css`
-      border-right: 5px solid #008b8b;
-      background-color: #00e6e6;
+      border-right: 5px solid #d9d916;
+      background-color: #f6f627;
 
       &:hover {
-        background-color: #00e6e6;
+        background-color: #f6f627;
       }
     `}
 `;

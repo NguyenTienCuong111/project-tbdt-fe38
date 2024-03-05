@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import React from "react";
 import Slider from "react-slick";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -49,6 +50,7 @@ const ProductDetailPage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  const [value, setValue] = useState("");
   const [reviewForm] = Form.useForm();
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
@@ -84,6 +86,9 @@ const ProductDetailPage = () => {
         name: productDetail.data.name,
         price: productDetail.data.price,
         image: productDetail.data.image,
+        image1: productDetail.data.image1,
+        image2: productDetail.data.image2,
+        image3: productDetail.data.image3,
         quantity: quantity,
       })
     );
@@ -268,7 +273,7 @@ const ProductDetailPage = () => {
               <Slider {...settings}>
                 <div>
                   <img
-                    src={productDetail.data.image}
+                    src={productDetail.data.image1}
                     alt=""
                     width="100%"
                     height="auto"
@@ -276,7 +281,7 @@ const ProductDetailPage = () => {
                 </div>
                 <div>
                   <img
-                    src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-tu-nhien-1-1.jpg"
+                    src={productDetail.data.image2}
                     alt=""
                     width="100%"
                     height="auto"
@@ -284,22 +289,7 @@ const ProductDetailPage = () => {
                 </div>
                 <div>
                   <img
-                    src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-tu-nhien-4-1.jpg"
-                    alt=""
-                    width="100%"
-                    height="auto"
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-tu-nhien-2-1.jpg"
-                    alt=""
-                    height="auto"
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-tu-nhien-3-1.jpg"
+                    src={productDetail.data.image3}
                     alt=""
                     width="100%"
                     height="auto"

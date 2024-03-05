@@ -1,11 +1,14 @@
+import { Flex } from "antd";
 import React from "react";
 import Slider from "react-slick";
+
 function SliderComponentPage() {
   var settings = {
     dots: true,
     infinite: true,
+
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1000,
@@ -13,7 +16,7 @@ function SliderComponentPage() {
   return (
     <div
       id="container"
-      style={{ backgroundColor: "#fefefef", padding: "0 120px" }}
+      style={{ backgroundColor: "#efefef", padding: "0 100px" }}
     >
       <Slider {...settings}>
         <div>

@@ -15,8 +15,10 @@ import ProductDetailPage from "pages/user/ProductDetail";
 import ToDoListPage from "pages/user/ToDoList";
 import CartPage from "pages/user/Cart";
 import CheckoutPage from "pages/user/Checkout";
+import OrderCheckPage from "pages/user/OrderCheck";
 import UserInfoPage from "pages/user/UserInfo";
 import OrderHistoryPage from "pages/user/OrderHistory";
+import FavoriteProductsPage from "pages/user/FavoriteProducts";
 import ChangePasswordPage from "pages/user/ChangePassword";
 import PaymentSuccessPage from "pages/user/PaymentSuccess";
 
@@ -46,7 +48,7 @@ function App() {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#f18585",
+          colorPrimary: "#f6f627",
           borderRadius: 0,
         },
       }}
@@ -70,6 +72,7 @@ function App() {
             path={ROUTES.USER.PAYMENTSUCCESS}
             element={<PaymentSuccessPage />}
           />
+          <Route path={ROUTES.USER.ORDER_CHECK} element={<OrderCheckPage />} />
           <Route element={<ProfileLayout />}>
             <Route
               path={ROUTES.USER.PROFILE}
@@ -79,6 +82,10 @@ function App() {
             <Route
               path={ROUTES.USER.ORDER_HISTORY}
               element={<OrderHistoryPage />}
+            />
+            <Route
+              path={ROUTES.USER.FAVORITE_PRODUCTS}
+              element={<FavoriteProductsPage />}
             />
             <Route
               path={ROUTES.USER.CHANGE_PASSWORD}

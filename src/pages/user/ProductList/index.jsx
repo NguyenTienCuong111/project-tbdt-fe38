@@ -10,13 +10,16 @@ import {
   Select,
   Breadcrumb,
   Space,
-  Rate
+  Rate,
 } from "antd";
 import {
   PhoneOutlined,
   DownOutlined,
   LaptopOutlined,
   HomeOutlined,
+  AppstoreOutlined,
+  BarsOutlined,
+  ShopOutlined,
 } from "@ant-design/icons";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -46,8 +49,8 @@ function ProductListPage() {
 
   const navigate = useNavigate();
 
-  const [isShowCB, setIsShowCB] = useState(true);
-  const [isShowCBLT, setIsShowCBLT] = useState(true);
+  const [isShowCB, setIsShowCB] = useState(false);
+  const [isShowCBLT, setIsShowCBLT] = useState(false);
 
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
@@ -59,7 +62,6 @@ function ProductListPage() {
   useEffect(() => {
     dispatch(getCategoryListRequest());
     dispatch(getTypeListRequest());
-    
   }, []);
 
   useEffect(() => {
@@ -125,23 +127,17 @@ function ProductListPage() {
               style={{
                 width: 230,
                 height: 300,
+                position: "relative",
+                overflow: "hidden",
               }}
-              cover={
-                <img
-                  style={{
-                    width: 150,
-                    marginLeft: 40,
-                    marginTop: 10,
-                  }}
-                  alt="example"
-                  src={item.image}
-                />
-              }
+              cover={<S.CartImg alt="example" src={item.image} />}
             >
-              <h3>{item.name}</h3>
-              <h4>Hãng: {item.category.name}</h4>
-              <h4>Giá: {item.price.toLocaleString()} VND</h4>
-              <Rate value={productRate} allowHalf disabled />
+              <S.DivWrapper>
+                <h3>{item.name}</h3>
+                <h4>Hãng: {item.category.name}</h4>
+                <h4>Giá: {item.price.toLocaleString()} VND</h4>
+                <Rate value={productRate} allowHalf disabled />
+              </S.DivWrapper>
             </Card>
           </Link>
         </Col>
@@ -174,9 +170,15 @@ function ProductListPage() {
                   setIsShowCB(!isShowCB);
                 }}
               >
-                <PhoneOutlined />
-                Hãng
-                <DownOutlined style={{ marginLeft: 250 }} />
+                <Space
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div style={{ color: "#0a0a0a" }}>
+                    <AppstoreOutlined />
+                    Hãng
+                  </div>
+                  <DownOutlined />
+                </Space>
               </S.DevicePhoneWrappe>
               {isShowCB && (
                 <S.CheckBoxWrapper>
@@ -197,9 +199,15 @@ function ProductListPage() {
                   setIsShowCBLT(!isShowCBLT);
                 }}
               >
-                <LaptopOutlined />
-                Loại
-                <DownOutlined style={{ marginLeft: 270 }} />
+                <Space
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div style={{ color: "#0a0a0a" }}>
+                    <ShopOutlined />
+                    Loại thiết bị
+                  </div>
+                  <DownOutlined />
+                </Space>
               </S.DevicePhoneWrappe>
               {isShowCBLT && (
                 <S.CheckBoxWrapper>

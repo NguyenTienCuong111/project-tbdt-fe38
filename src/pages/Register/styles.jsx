@@ -29,7 +29,7 @@ export const RegisterLogoImage = styled.img`
 export const RegisterText = styled.h1`
   text-align: center;
   padding: 20px 0px;
-  color: #f18585;
+  color: #f6f627;
 `;
 export const RegisterBanner = styled.img`
   padding: 20px;

@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 function Footer() {
   return (
-    <S.FooterWrapper>
+    <S.FooterWrapper style={{ marginTop: 30 }}>
       <S.FooterContainer>
         <S.UlWrapper>
           Hệ Thống Mona media

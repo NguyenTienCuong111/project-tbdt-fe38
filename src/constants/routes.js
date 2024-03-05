@@ -10,6 +10,7 @@ export const ROUTES = {
     CART: "/cart",
     CHECKOUT: "/checkout",
     PAYMENTSUCCESS: "/paymentsuccess",
+    ORDER_CHECK: "/order-check",
     TO_DO_LIST: "/to-do-list",
     // profile
     PROFILE: "/profile",

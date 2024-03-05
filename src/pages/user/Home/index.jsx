@@ -9,9 +9,11 @@ import * as S from "./styles";
 function HomePage() {
   return (
     <S.HomeWrapper>
-      <SliderComponentPage>
-        
-      </SliderComponentPage>
+      <img
+        src="https://bizweb.dktcdn.net/100/177/937/themes/881538/assets/big_bn_slide.png?1709285773940"
+        alt=""
+      />
+      <SliderComponentPage></SliderComponentPage>
       <div>
         <Link
           to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
@@ -30,6 +32,7 @@ function HomePage() {
           Danh sách sản phẩm Samsung
         </Link>
       </div>
+      
     </S.HomeWrapper>
   );
 }

@@ -60,6 +60,14 @@ function CheckoutPage() {
 
   const tableColumn = [
     {
+      title: "Hình ảnh",
+      dataIndex: "image",
+      key: "image",
+      render: (text) => (
+        <img src={text} alt="" style={{ width: "80px", height: "80px" }} />
+      ),
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",

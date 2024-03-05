@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
-  background-color: #f18585;
+  background-color: #f6f627;
 `;
 export const FooterContainer = styled.div`
   display: flex;
@@ -16,18 +16,18 @@ export const FooterContainer = styled.div`
 export const UlWrapper = styled.ul`
   list-style: none;
   font-size: 16px;
-  color: #c5ea0e;
+  color: #ed2929;
   font-weight: bold;
   margin-top: 10px;
 `;
 export const LiWrapper = styled.li`
   margin-top: 15px;
   font-size: 14px;
-  color: white;
+  color: #0d0b0b;
   font-weight: 500;
 `;
 export const PayLiWrapper = styled.li``;
 export const SignUpLiWrapper = styled.li`
-  color: #c5ea0e;
+  color: #ed2929;
   margin-top: 15px;
 `;

@@ -10,6 +10,9 @@ import "./index.css";
 import App from "./App";
 import store from "./store";
 import reportWebVitals from "./reportWebVitals";
+import "react-quill/dist/quill.snow.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 dayjs.locale("vi");
 dayjs.extend(relativeTime);

@@ -7,6 +7,9 @@ import { CameraOutlined, UserOutlined, HomeOutlined } from "@ant-design/icons";
 import { ROUTES } from "constants/routes";
 import { convertImageToBase64 } from "utils/file";
 import { PROFILE_MENU } from "./constants";
+import React from "react";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 import { changeAvatarRequest } from "../../redux/slicers/auth.slice";
 
@@ -55,7 +58,22 @@ function Profile() {
   }, [pathname]);
 
   if (accessToken && userInfo.loading) {
-    return <div>Loading...</div>;
+    return (
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <Spin
+          indicator={
+            <LoadingOutlined
+              style={{
+                fontSize: 100,
+                textAlign: "center",
+                marginTop: "50px",
+              }}
+              spin
+            />
+          }
+        />
+      </div>
+    );
   } else if (!userInfo.data.id) {
     return <Navigate to={ROUTES.USER.HOME} />;
   }

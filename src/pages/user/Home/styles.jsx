@@ -48,7 +48,6 @@ export const CheckBoxWrapper = styled.div`
 `;
 
 export const SPBCWrapper = styled.div`
-  margin: 0 40px;
   width: 100%;
 `;
 
@@ -82,7 +81,16 @@ export const NewsItemWrapper = styled.div`
   display: flex;
   width: 100%;
 `;
-
+export const ProductTitle = styled.h3`
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: ${(props) => props.truncateMultiLine || 1};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 30px;
+  font-size: 16px;
+`;
 export const Img = styled.img`
   width: 150px !important;
   height: 50px !important;
@@ -90,8 +98,7 @@ export const Img = styled.img`
 
 export const CartImg = styled.img`
   width: 150px !important;
-  margin-left: 40px !important;
-  margin-top: 10px !important;
+  object-fit: cover;
   transition: transform 0.5s ease;
   &:hover {
     transform: scale(1.1); /* Phóng to 110% */

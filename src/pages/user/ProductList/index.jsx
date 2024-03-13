@@ -22,6 +22,7 @@ import {
   BarsOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
+import styled from "styled-components";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import qs from "qs";
@@ -136,10 +137,11 @@ function ProductListPage() {
             <Card
               size="small"
               style={{
-                width: 230,
                 height: 300,
-                position: "relative",
-                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
                 border: "solid 0px #ccc",
                 borderRadius: "10px",
                 boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -147,7 +149,7 @@ function ProductListPage() {
               cover={<S.CartImg alt="example" src={item.image} />}
             >
               <S.DivWrapper>
-                <h3>{item.name}</h3>
+                <S.ProductTitle>{item.name}</S.ProductTitle>
                 <Tag color="gold">{item.category.name}</Tag>
                 <Tag color="#f50">{item.price.toLocaleString()} ₫</Tag>
                 <Rate style={{ marginTop: 10 }} value={5} allowHalf disabled />
@@ -173,6 +175,9 @@ function ProductListPage() {
                 </Space>
               </Link>
             ),
+          },
+          {
+            title: "Danh sách sản phẩm",
           },
         ]}
       />
@@ -324,14 +329,19 @@ function ProductListPage() {
                 </Select>
               </Col>
             </Row>
-            <Row gutter={[16, 16]}>{renderProductItems}</Row>
+            <Row style={{ padding: "10px 10px" }} gutter={[16, 16]}>
+              {renderProductItems}
+            </Row>
             {productList.data.length < productList.meta.total && (
               <Flex justify="center" style={{ marginTop: 16 }}>
                 <Button onClick={() => handleShowMore()}>Hiển thị thêm</Button>
               </Flex>
             )}
             <div style={{ marginTop: 20, fontSize: "16px" }}>
-              <h2> Hệ thống cửa hàng MONA Computer </h2>
+              <h2 style={{ fontSize: "20px" }}>
+                {" "}
+                Hệ thống cửa hàng MONA Computer{" "}
+              </h2>
               <p style={{ marginTop: 20 }}>
                 - Mua bán các dòng điện thoại IPhone chính hãng mới và cũ like
                 new

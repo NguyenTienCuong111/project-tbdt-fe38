@@ -159,51 +159,43 @@ const ProductDetailPage = () => {
     dispatch(
       getProductListRequest({
         ...searchParams,
-        page: 1,
+        page: 2,
         limit: PRODUCT_LIMIT1,
       })
     );
   }, [searchParams]);
 
   const renderProductItems = useMemo(() => {
-    const categoryId = productDetail.data.category?.id;
-    return productList.data
-      .filter((item) => item.categoryId === categoryId)
-      .map((item, index) => {
-        return (
-          <Col lg={8} md={8} sm={12} key={index}>
-            <Link
-              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+    // const categoryId = productDetail.data.category?.id;
+    return productList.data.map((item, index) => {
+      return (
+        <Col lg={5} md={8} sm={12} key={index}>
+          <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
+            <Card
+              size="small"
+              style={{
+                height: 300,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
+              }}
+              cover={<S.CartImg alt="example" src={item.image} />}
             >
-              <Card
-                size="small"
-                style={{
-                  width: 200,
-                  height: 280,
-                  position: "relative",
-                  overflow: "hidden",
-                  border: "none",
-                  borderRadius: "10px",
-                  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
-                }}
-                cover={<S.CartImg alt="example" src={item.image} />}
-              >
-                <S.DivWrapper>
-                  <h3>{item.name}</h3>
-                  <Tag color="gold">{item.category.name}</Tag>
-                  <Tag color="#f50">{item.price.toLocaleString()} ₫</Tag>
-                  <Rate
-                    style={{ marginTop: 10 }}
-                    value={5}
-                    allowHalf
-                    disabled
-                  />
-                </S.DivWrapper>
-              </Card>
-            </Link>
-          </Col>
-        );
-      });
+              <S.DivWrapper>
+                <S.ProductTitle>{item.name}</S.ProductTitle>
+                <Tag color="gold">{item.category.name}</Tag>
+                <Tag color="#f50">{item.price.toLocaleString()} ₫</Tag>
+                <Rate style={{ marginTop: 10 }} value={5} allowHalf disabled />
+              </S.DivWrapper>
+            </Card>
+          </Link>
+        </Col>
+      );
+    });
   }, [productList.data, productDetail.data]);
 
   const renderReviewForm = useMemo(() => {
@@ -315,6 +307,11 @@ const ProductDetailPage = () => {
                   <span>Trang chủ</span>
                 </Space>
               </Link>
+            ),
+          },
+          {
+            title: (
+              <Link to={ROUTES.USER.PRODUCT_LIST}>Danh sách sản phẩm</Link>
             ),
           },
           {
@@ -576,9 +573,13 @@ const ProductDetailPage = () => {
                 borderRadius: 10,
               }}
             >
-              <div
-                dangerouslySetInnerHTML={{ __html: productDetail.data.content }}
-              />
+              <div className="ql-editor" style={{ padding: 0 }}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: productDetail.data.content,
+                  }}
+                />
+              </div>
             </Card>
             <Card
               size="small"
@@ -642,13 +643,6 @@ const ProductDetailPage = () => {
         >
           <S.SPBCWrapper>
             <Row gutter={[24, 24]}>{renderProductItems}</Row>
-            {productList.data.length < productList.meta.total && (
-              <Flex justify="center" style={{ marginTop: 16 }}>
-                <Button onClick={() => navigate(ROUTES.USER.PRODUCT_LIST)}>
-                  Hiển thị thêm
-                </Button>
-              </Flex>
-            )}
           </S.SPBCWrapper>
         </Card>
       </S.ProductDetailContainer>

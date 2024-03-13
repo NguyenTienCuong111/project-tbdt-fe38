@@ -40,18 +40,27 @@ export const ItemBlogBlock = styled.div`
     background-color: #34ff34;
     border: none;
     border-radius: 10px;
-    color: red
+    color: red;
   }
 `;
 
 export const CheckBoxWrapper = styled.div`
   padding: 15px 25px 15px 40px;
 `;
+export const ProductTitle = styled.h3`
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: ${(props) => props.truncateMultiLine || 1};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 30px;
+  font-size: 16px;
+`;
 
 export const CartImg = styled.img`
   width: 150px !important;
-  margin-left: 40px !important;
-  margin-top: 10px !important;
+  object-fit: cover;
   transition: transform 0.5s ease;
   &:hover {
     transform: scale(1.1); /* Phóng to 110% */

@@ -14,12 +14,21 @@ export const ProductDetailContainer = styled.div`
 `;
 export const CartImg = styled.img`
   width: 150px !important;
-  margin-left: 40px !important;
-  margin-top: 10px !important;
+  object-fit: cover;
   transition: transform 0.5s ease;
   &:hover {
     transform: scale(1.1); /* Phóng to 110% */
   }
+`;
+export const ProductTitle = styled.h3`
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: ${(props) => props.truncateMultiLine || 1};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 30px;
+  font-size: 16px;
 `;
 export const DivWrapper = styled.div`
   &:hover h3 {

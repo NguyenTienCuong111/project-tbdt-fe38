@@ -11,7 +11,7 @@ import { getProductListRequest } from "../../../redux/slicers/product.slice";
 import { Link, generatePath, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Slider from "react-slick";
-import { PRODUCT_LIMIT } from "constants/paging";
+import { PRODUCT_LIMIT2 } from "constants/paging";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ function HomePage() {
       getProductListRequest({
         ...searchParams,
         page: 1,
-        limit: PRODUCT_LIMIT,
+        limit: PRODUCT_LIMIT2,
       })
     );
   }, [searchParams]);
@@ -63,24 +63,24 @@ function HomePage() {
   const renderProductItems = useMemo(() => {
     return productList.data.map((item, index) => {
       return (
-        <Col lg={6} md={8} sm={12} key={index}>
+        <Col lg={4} md={8} sm={12} key={index}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
             <Card
               size="small"
               style={{
-                width: 240,
-                height: 280,
-                position: "relative",
-                overflow: "hidden",
-                border: "none",
+                height: 300,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                border: "solid 0px #ccc",
                 borderRadius: "10px",
-              
                 boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
               }}
               cover={<S.CartImg alt="example" src={item.image} />}
             >
               <S.DivWrapper>
-                <h3>{item.name}</h3>
+                <S.ProductTitle>{item.name}</S.ProductTitle>
                 <Tag color="gold">{item.category.name}</Tag>
                 <Tag color="#f50">{item.price.toLocaleString()} ₫</Tag>
                 <Rate style={{ marginTop: 10 }} value={5} allowHalf disabled />

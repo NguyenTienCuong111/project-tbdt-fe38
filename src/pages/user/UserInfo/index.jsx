@@ -44,7 +44,7 @@ function UserInfo() {
       onFinish={(values) => handleUpdateUserInfo(values)}
     >
       <Form.Item
-        label="Họ và tên"
+        label="Tên đăng nhập"
         name="fullName"
         rules={[
           {
@@ -87,8 +87,8 @@ function UserInfo() {
       >
         <DatePicker placeholder="Chọn ngày" />
       </Form.Item>
-      <Button type="primary" htmlType="submit" block>
-        Cập nhật
+      <Button type="primary" htmlType="submit">
+        Lưu
       </Button>
     </Form>
   );

@@ -90,9 +90,7 @@ function Header() {
             <StyledLink>Công nghệ 24h</StyledLink>
             <StyledLink
               style={{
-               
                 borderLeft: "solid black",
-                
               }}
             >
               Khuyến mãi mới
@@ -197,7 +195,11 @@ function Header() {
             </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <StyledLink>
+            <StyledLink
+              to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
+                typeId: [4],
+              })}`}
+            >
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Ipad</span>
               <CaretDownOutlined />
             </StyledLink>
@@ -215,7 +217,11 @@ function Header() {
             </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <StyledLink>
+            <StyledLink
+              to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
+                typeId: [5],
+              })}`}
+            >
               <CameraOutlined />
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Camera</span>
             </StyledLink>

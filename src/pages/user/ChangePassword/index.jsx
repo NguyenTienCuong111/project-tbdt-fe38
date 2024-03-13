@@ -2,13 +2,38 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input } from "antd";
 
+import { changePasswordRequest } from "../../../redux/slicers/auth.slice";
+
 function ChangePassword() {
   const [changePasswordForm] = Form.useForm();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, changePasswordData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const handleChangePassword = (values) => {};
+  useEffect(() => {
+    if (changePasswordData.error) {
+      changePasswordForm.setFields([
+        {
+          name: "password",
+          errors: ["Mật khẩu cũ không đúng!"],
+        },
+      ]);
+    }
+  }, [changePasswordData.error]);
+
+  const handleChangePassword = (values) => {
+    dispatch(
+      changePasswordRequest({
+        id: userInfo.data.id,
+        data: {
+          email: userInfo.data.email,
+          password: values.password,
+          newPassword: values.newPassword,
+        },
+        callback: () => changePasswordForm.resetFields(),
+      })
+    );
+  };
 
   return (
     <Form
@@ -24,7 +49,7 @@ function ChangePassword() {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "Vui lòng nhập mật khẩu cũ!",
           },
         ]}
       >
@@ -36,7 +61,7 @@ function ChangePassword() {
         rules={[
           {
             required: true,
-            message: "Please input your new password!",
+            message: "Vui lòng nhập mật khẩu mới!",
           },
         ]}
       >
@@ -48,23 +73,26 @@ function ChangePassword() {
         rules={[
           {
             required: true,
-            message: "Please input your confirm new password!",
+            message: "Vui lòng xác nhận mật khẩu mới!",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue("newPassword") === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(
-                "The two passwords that you entered do not match!"
-              );
+              return Promise.reject("Mật khẩu không khớp!");
             },
           }),
         ]}
       >
         <Input.Password />
       </Form.Item>
-      <Button type="primary" htmlType="submit" block>
+      <Button
+        type="primary"
+        htmlType="submit"
+        block
+        loading={changePasswordData.load}
+      >
         Thay đổi
       </Button>
     </Form>

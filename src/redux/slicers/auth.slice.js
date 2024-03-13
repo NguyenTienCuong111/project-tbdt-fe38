@@ -18,6 +18,10 @@ const initialState = {
     loading: false,
     error: null,
   },
+  changePasswordData: {
+    load: false,
+    error: null,
+  },
   changeAvatarData: {
     loading: false,
     error: null,
@@ -97,6 +101,20 @@ export const authSlice = createSlice({
       state.updateUserInfoData.loading = false;
     },
 
+    // changePassword
+    changePasswordRequest: (state, action) => {
+      state.changePasswordData.loading = true;
+      state.changePasswordData.error = null;
+    },
+    changePasswordSuccess: (state, action) => {
+      state.changePasswordData.loading = false;
+    },
+    changePasswordFailure: (state, action) => {
+      const { error } = action.payload;
+      state.changePasswordData.loading = false;
+      state.changePasswordData.error = error;
+    },
+
     // changeAvatar
     changeAvatarRequest: (state) => {
       state.changeAvatarData.loading = true;
@@ -129,6 +147,9 @@ export const {
   updateUserInfoRequest,
   updateUserInfoSuccess,
   updateUserInfoFail,
+  changePasswordRequest,
+  changePasswordSuccess,
+  changePasswordFailure,
   changeAvatarRequest,
   changeAvatarSuccess,
   changeAvatarFail,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 
@@ -58,12 +58,41 @@ const OrderHistories = () => {
         expandedRowRender: (record) => (
           <ul>
             {record.orderDetails.map((item) => (
-              <li key={item.id}>
-                {item.productName}
-                {` - ${item.price}`}
-                {` - ${item.quantity}`}
-                {` - ${item.price * item.quantity}`}
-              </li>
+              // <li key={item.id}>
+              //   {item.productName}
+              //   {` - ${item.price}`}
+              //   {` - ${item.quantity}`}
+              //   {` - ${item.price * item.quantity}`}
+              // </li>
+              <div
+                key={item.id}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  padding: "10px 10px",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  border: "solid 1px #ccc",
+                  margin: "10px 0px",
+                  boxShadow: "rgb(38, 57, 77) 0px 20px 10px -10px",
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt=""
+                  style={{ width: "80px", height: "90px" }}
+                />
+                <div style={{ fontSize: 18, padding: "10px 20px" }}>
+                  <p>{item.productName}</p>
+
+                  <p>x{item.quantity}</p>
+                </div>
+                <div>
+                  <Tag style={{ fontSize: 16 }} color="#f50">
+                    {item.price.toLocaleString()} ₫
+                  </Tag>
+                </div>
+              </div>
             ))}
           </ul>
         ),

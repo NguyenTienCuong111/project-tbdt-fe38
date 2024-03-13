@@ -20,7 +20,20 @@ export const AvatarContainer = styled.div`
   align-items: center;
   padding: 16px;
 `;
-
+export const SaleContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  & :hover {
+    color: red;
+  }
+`;
 export const AvatarUpload = styled.div`
   position: relative;
   margin-bottom: 16px;

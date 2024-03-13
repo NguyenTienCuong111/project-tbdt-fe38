@@ -101,39 +101,80 @@ function Profile() {
         <Col md={6}>
           <S.ProfileMenuWrapper bordered={false} size="small">
             <S.AvatarContainer>
-              <S.AvatarUpload>
-                <S.AvatarEdit>
-                  <input
-                    type="file"
-                    id="imageUpload"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={(e) => handleChangeAvatar(e)}
-                  />
-                  <label htmlFor="imageUpload">
-                    <CameraOutlined style={{ fontSize: 16 }} />
-                  </label>
-                </S.AvatarEdit>
-                {userInfo.data.avatar ? (
-                  <S.AvatarPreview
-                    src={userInfo.data.avatar}
-                    alt="User profile picture"
-                  />
-                ) : (
-                  <S.AvatarDefaultWrapper>
-                    <S.AvatarDefaultContainer
-                      icon={<UserOutlined style={{ fontSize: 36 }} />}
+              <Space>
+                <S.AvatarUpload>
+                  <S.AvatarEdit>
+                    <input
+                      type="file"
+                      id="imageUpload"
+                      accept=".png, .jpg, .jpeg"
+                      onChange={(e) => handleChangeAvatar(e)}
                     />
-                  </S.AvatarDefaultWrapper>
-                )}
-              </S.AvatarUpload>
-              <h3>{userInfo.data.fullName}</h3>
-              <p>{userInfo.data.email}</p>
+                    <label htmlFor="imageUpload">
+                      <CameraOutlined style={{ fontSize: 16 }} />
+                    </label>
+                  </S.AvatarEdit>
+                  {userInfo.data.avatar ? (
+                    <S.AvatarPreview
+                      src={userInfo.data.avatar}
+                      alt="User profile picture"
+                    />
+                  ) : (
+                    <S.AvatarDefaultWrapper>
+                      <S.AvatarDefaultContainer
+                        icon={<UserOutlined style={{ fontSize: 36 }} />}
+                      />
+                    </S.AvatarDefaultWrapper>
+                  )}
+                </S.AvatarUpload>
+                <h3>{userInfo.data.fullName}</h3>
+              </Space>
+              <p style={{ fontFamily: "initial", color: "#048f22" }}>
+                {userInfo.data.email}
+              </p>
+              <S.SaleContainer>
+                <img
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://down-vn.img.susercontent.com/file/sg-11134004-7rcds-lsi2s50t92mv75"
+                  alt="ảnh"
+                />
+                <span> Ngày 15 Sale Giữa Tháng</span>
+              </S.SaleContainer>
             </S.AvatarContainer>
             <S.ProfileMenuContainer>{renderProfileMenu}</S.ProfileMenuContainer>
           </S.ProfileMenuWrapper>
         </Col>
         <Col md={18}>
-          <Card bordered={false} size="small" title={profileLabel}>
+          <Card
+            bordered={false}
+            size="small"
+            title={
+              <>
+                <span
+                  style={{
+                    color: "red",
+                    fontSize: "26px",
+                    padding: " 0px 10px",
+                  }}
+                >
+                  {profileLabel}
+                </span>
+                <p
+                  style={{
+                    color: "#474747",
+                    fontSize: "16px",
+                    padding: " 0px 10px",
+                  }}
+                >
+                  Quản lý thông tin hồ sơ để bảo mật tài khoản
+                </p>
+              </>
+            }
+          >
             <Outlet />
           </Card>
         </Col>

@@ -2,17 +2,19 @@ import styled from "styled-components";
 
 export const RegisterContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: calc(100vh - 100px);
+  width: 100%;
+  height: 100vh;
+  background-color: #e4e4e4;
 `;
-
+export const RegisterFormContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export const RegisterForm = styled.div`
-  padding: 20px;
-  margin-top: 50px;
   max-width: 400px;
   width: 100%;
-  background-color: white;
 `;
 
 export const RegisterLogo = styled.div`
@@ -21,20 +23,21 @@ export const RegisterLogo = styled.div`
   align-items: center;
 `;
 export const RegisterLogoImage = styled.img`
-  width: 200px;
+  width: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 export const RegisterText = styled.h1`
   text-align: center;
-  padding: 20px 0px;
-  color: #f6f627;
+  padding: 10px 0px;
+
+  font-size: 42px;
+`;
+export const RegisterBannerContainer = styled.div`
+  flex: 1;
 `;
 export const RegisterBanner = styled.img`
-  padding: 20px;
-  margin-top: 50px;
-  max-width: 600px;
   width: 100%;
-  background-color: white;
+  height: 100%;
 `;

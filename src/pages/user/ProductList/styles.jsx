@@ -21,6 +21,29 @@ export const DevicePhoneWrappe = styled.div`
     margin-right: 5px;
   }
 `;
+export const ProductListContainer = styled.div`
+  border: none;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+`;
+export const ItemBlogBlock = styled.div`
+  width: 150px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  margin: 5px 5px;
+  font-size: 16px;
+  font-weight: 500;
+  &:hover {
+    background-color: #34ff34;
+    border: none;
+    border-radius: 10px;
+    color: red
+  }
+`;
+
 export const CheckBoxWrapper = styled.div`
   padding: 15px 25px 15px 40px;
 `;

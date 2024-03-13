@@ -31,6 +31,7 @@ function Footer() {
           Thanh toán an toàn
           <S.PayLiWrapper>
             <img
+              style={{ width: "270px" }}
               alt="tienmat"
               src="https://mauweb.monamedia.net/hanoicomputer/wp-content/uploads/2019/06/sprite-2.png"
             ></img>

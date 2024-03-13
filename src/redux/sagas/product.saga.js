@@ -27,7 +27,7 @@ function* getProductListSaga(action) {
         }),
         _page: page,
         _limit: limit,
-        _expand: "category",
+        _expand: ["category", "type"],
         isDelete: false,
       },
     });
@@ -52,8 +52,8 @@ function* getProductDetailSaga(action) {
     const { id } = action.payload;
     const result = yield axios.get(`http://localhost:4000/products/${id}`, {
       params: {
-        _expand: "category",
-        _embed: 'favorites',
+        _expand: ["category", "type"],
+        _embed: "favorites",
       },
     });
     yield put(getProductDetailSuccess({ data: result.data }));

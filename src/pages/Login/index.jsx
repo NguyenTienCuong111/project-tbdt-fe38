@@ -45,45 +45,61 @@ const LoginPage = () => {
 
   return (
     <S.LoginContainer>
-      <S.LoginForm>
-        <S.LoginLogo>
-          <S.LoginLogoImage
-            src="http://mauweb.monamedia.net/hanoicomputer/wp-content/uploads/2019/06/logo-final.png"
-            alt=""
-          />
-        </S.LoginLogo>
-        <S.LoginText>Login</S.LoginText>
-        <Form
-          style={{ marginTop: 10 }}
-          form={loginForm}
-          name="loginForm"
-          layout="vertical"
-          onFinish={(values) => handleSubmit(values)}
-        >
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
+      <S.LoginFormContainer>
+        <S.LoginForm>
+          <S.LoginLogo>
+            <S.LoginLogoImage
+              src="http://mauweb.monamedia.net/hanoicomputer/wp-content/uploads/2019/06/logo-final.png"
+              alt=""
+            />
+          </S.LoginLogo>
+          <S.LoginText>Login</S.LoginText>
+          <Form
+            style={{ marginTop: 10 }}
+            form={loginForm}
+            name="loginForm"
+            layout="vertical"
+            onFinish={(values) => handleSubmit(values)}
           >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
 
-          <Form.Item
-            label="Mật khẩu"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <div style={{ marginBottom: 16 }}>
-            Bạn chưa có tài khoản? <Link to={ROUTES.REGISTER}>Đăng ký</Link>
-          </div>
-          <Button type="primary" htmlType="submit" block>
-            Đăng nhập
-          </Button>
-        </Form>
-      </S.LoginForm>
-      <S.LoginBanner src="https://static.vecteezy.com/system/resources/previews/005/879/539/non_2x/cloud-computing-modern-flat-concept-for-web-banner-design-man-enters-password-and-login-to-access-cloud-storage-for-uploading-and-processing-files-illustration-with-isolated-people-scene-free-vector.jpg"></S.LoginBanner>
+            <Form.Item
+              label="Mật khẩu"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
+            <div style={{ marginBottom: 16 }}>
+              Bạn chưa có tài khoản? <Link to={ROUTES.REGISTER}>Đăng ký</Link>
+            </div>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              style={{
+                borderRadius: "10px",
+                height: 40,
+                color: "#000000",
+                fontWeight: "bold",
+              }}
+            >
+              Đăng nhập
+            </Button>
+          </Form>
+        </S.LoginForm>
+      </S.LoginFormContainer>
+      <S.LoginBannerContainer>
+        <S.LoginBanner src="https://cdn.pixabay.com/photo/2018/07/12/21/32/subscribe-3534409_1280.jpg"></S.LoginBanner>
+      </S.LoginBannerContainer>
     </S.LoginContainer>
   );
 };

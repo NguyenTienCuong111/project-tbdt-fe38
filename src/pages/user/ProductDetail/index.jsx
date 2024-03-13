@@ -4,7 +4,13 @@ import Slider from "react-slick";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  useNavigate,
+  generatePath,
+  useLocation,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Row,
@@ -17,6 +23,8 @@ import {
   Form,
   Input,
   Rate,
+  Tag,
+  Flex,
   notification,
 } from "antd";
 import {
@@ -24,6 +32,8 @@ import {
   HeartOutlined,
   HeartFilled,
   HomeOutlined,
+  GiftOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import qs from "qs";
@@ -39,6 +49,8 @@ import {
   unFavoriteProductRequest,
 } from "../../../redux/slicers/favorite.slice";
 import { addToCartRequest } from "../../../redux/slicers/cart.slice";
+import { getProductListRequest } from "../../../redux/slicers/product.slice";
+import { PRODUCT_LIMIT1 } from "constants/paging";
 
 import * as S from "./styles";
 
@@ -54,9 +66,7 @@ const ProductDetailPage = () => {
   const [reviewForm] = Form.useForm();
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
-  const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { productDetail } = useSelector((state) => state.product);
   const { reviewList } = useSelector((state) => state.review);
@@ -129,6 +139,71 @@ const ProductDetailPage = () => {
       })
     );
   };
+  const navigate = useNavigate();
+  const { productList } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const { search } = useLocation();
+  const searchParams = useMemo(() => {
+    const params = qs.parse(search, { ignoreQueryPrefix: true });
+    return {
+      categoryId: params.categoryId
+        ? params.categoryId.map((item) => parseInt(item))
+        : [],
+      typeId: params.typeId ? params.typeId.map((item) => parseInt(item)) : [],
+      priceOrder: params.priceOrder,
+      keyword: params.keyword || "",
+    };
+  }, [search]);
+
+  useEffect(() => {
+    dispatch(
+      getProductListRequest({
+        ...searchParams,
+        page: 1,
+        limit: PRODUCT_LIMIT1,
+      })
+    );
+  }, [searchParams]);
+
+  const renderProductItems = useMemo(() => {
+    const categoryId = productDetail.data.category?.id;
+    return productList.data
+      .filter((item) => item.categoryId === categoryId)
+      .map((item, index) => {
+        return (
+          <Col lg={8} md={8} sm={12} key={index}>
+            <Link
+              to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}
+            >
+              <Card
+                size="small"
+                style={{
+                  width: 200,
+                  height: 280,
+                  position: "relative",
+                  overflow: "hidden",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+                cover={<S.CartImg alt="example" src={item.image} />}
+              >
+                <S.DivWrapper>
+                  <h3>{item.name}</h3>
+                  <Tag color="gold">{item.category.name}</Tag>
+                  <Tag color="#f50">{item.price.toLocaleString()} ₫</Tag>
+                  <Rate
+                    style={{ marginTop: 10 }}
+                    value={5}
+                    allowHalf
+                    disabled
+                  />
+                </S.DivWrapper>
+              </Card>
+            </Link>
+          </Col>
+        );
+      });
+  }, [productList.data, productDetail.data]);
 
   const renderReviewForm = useMemo(() => {
     if (userInfo.data.id) {
@@ -204,6 +279,15 @@ const ProductDetailPage = () => {
       return (
         <S.ReviewItemWrapper key={item.id}>
           <Space>
+            <img
+              style={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+              }}
+              src={item.user.avatar}
+              alt=""
+            />
             <h3>{item.user.fullName}</h3>
             <p>{dayjs(item.createdAt).fromNow()}</p>
           </Space>
@@ -236,11 +320,11 @@ const ProductDetailPage = () => {
             title: (
               <Link
                 to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
-                  typeId: [2],
+                  typeId: [productDetail.data.type?.id],
                 })}`}
               >
                 <Space>
-                  <span>Điện thoại</span>
+                  <span>{productDetail.data.type?.name}</span>
                 </Space>
               </Link>
             ),
@@ -249,7 +333,7 @@ const ProductDetailPage = () => {
             title: (
               <Link
                 to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
-                  categoryId: [1],
+                  categoryId: [productDetail.data.category?.id],
                 })}`}
               >
                 <Space>
@@ -263,114 +347,310 @@ const ProductDetailPage = () => {
           },
         ]}
       />
-      <Card size="small" bordered={false} style={{ marginTop: 20 }}>
-        <Row gutter={[16, 16]}>
-          <Col md={10} sm={24}>
-            <div
-              className="slider-container"
-              style={{ backgroundColor: "white", padding: "0 30px" }}
-            >
-              <Slider {...settings}>
-                <div>
-                  <img
-                    src={productDetail.data.image1}
-                    alt=""
-                    width="100%"
-                    height="auto"
-                  />
-                </div>
-                <div>
-                  <img
-                    src={productDetail.data.image2}
-                    alt=""
-                    width="100%"
-                    height="auto"
-                  />
-                </div>
-                <div>
-                  <img
-                    src={productDetail.data.image3}
-                    alt=""
-                    width="100%"
-                    height="auto"
-                  />
-                </div>
-              </Slider>
-            </div>
-          </Col>
-          <Col md={14} sm={24}>
-            <p size="sm">{productDetail.data.category?.name}</p>
-            <h1>{productDetail.data.name}</h1>
-            <Space>
-              <Rate value={productRate} allowHalf disabled />
-              <span>{`(${
-                productRate ? `${productRate} sao` : "Chưa có đánh giá"
-              })`}</span>
-            </Space>
-            <h3 style={{ color: "#006363" }}>
-              {productDetail.data.price?.toLocaleString()} ₫
-            </h3>
-            <div style={{ margin: "8px 0" }}>
-              <InputNumber
-                value={quantity}
-                min={1}
-                onChange={(value) => setQuantity(value)}
-              />
-            </div>
-            <Space>
+      <S.ProductDetailContainer>
+        <Card
+          size="small"
+          bordered={false}
+          style={{
+            marginTop: 20,
+            border: "none",
+            borderRadius: 10,
+          }}
+        >
+          <Row gutter={[16, 16]}>
+            <Col md={10} sm={24}>
+              <div
+                className="slider-container"
+                style={{ backgroundColor: "white", padding: "0 30px" }}
+              >
+                <Slider {...settings}>
+                  <div>
+                    <img
+                      src={productDetail.data.image1}
+                      alt=""
+                      width="100%"
+                      height="auto"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={productDetail.data.image2}
+                      alt=""
+                      width="100%"
+                      height="auto"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src={productDetail.data.image3}
+                      alt=""
+                      width="100%"
+                      height="auto"
+                    />
+                  </div>
+                </Slider>
+              </div>
+            </Col>
+
+            <Col md={8} sm={24}>
+              <h1>{productDetail.data.name}</h1>
+              <Space>
+                <Rate value={productRate} allowHalf disabled />
+                <span>{`(${
+                  productRate ? `${productRate} sao` : "Chưa có đánh giá"
+                })`}</span>
+              </Space>
+              <div
+                style={{
+                  width: 350,
+                  height: 70,
+                  backgroundColor: "#f8f8f8",
+                  display: "flex",
+                  alignItems: "center",
+                  paddingLeft: "30px",
+                  margin: "10px 0px",
+                  border: "none",
+                  borderRadius: 15,
+                }}
+              >
+                <h3 style={{ color: "#d61010", fontSize: 18 }}>
+                  {productDetail.data.price?.toLocaleString()} ₫
+                </h3>
+              </div>
+
+              <div style={{ margin: "8px 0", fontSize: 18 }}>
+                Số lượng: &nbsp;
+                <InputNumber
+                  value={quantity}
+                  min={1}
+                  onChange={(value) => setQuantity(value)}
+                />
+              </div>
+              <Space>
+                <Button
+                  size="large"
+                  type="primary"
+                  icon={<ShoppingCartOutlined />}
+                  onClick={() => handleAddToCart()}
+                >
+                  Thêm vào giỏ
+                </Button>
+                <Button
+                  size="large"
+                  type="text"
+                  danger={isFavorite}
+                  icon={
+                    isFavorite ? (
+                      <HeartFilled style={{ fontSize: 24 }} />
+                    ) : (
+                      <HeartOutlined
+                        style={{ fontSize: 24, color: "#414141" }}
+                      />
+                    )
+                  }
+                  onClick={() => handleToggleFavorite()}
+                ></Button>
+
+                <p>{productDetail.data?.favorites?.length || 0} Lượt thích</p>
+              </Space>
               <Button
                 size="large"
                 type="primary"
-                icon={<ShoppingCartOutlined />}
-                onClick={() => handleAddToCart()}
+                style={{
+                  backgroundColor: "red",
+                  marginTop: "10px",
+                  width: "100%",
+                }}
+                onClick={() => navigate(ROUTES.USER.CHECKOUT)}
               >
-                Add to cart
+                Mua ngay
               </Button>
-              <Button
-                size="large"
-                type="text"
-                danger={isFavorite}
-                icon={
-                  isFavorite ? (
-                    <HeartFilled style={{ fontSize: 24 }} />
-                  ) : (
-                    <HeartOutlined style={{ fontSize: 24, color: "#414141" }} />
-                  )
-                }
-                onClick={() => handleToggleFavorite()}
-              ></Button>
-              <p>{productDetail.data?.favorites?.length || 0} Lượt thích</p>
-            </Space>
+              <div style={{ marginTop: 20, fontSize: "14px" }}>
+                <p>
+                  👉Bảo hành chính hãng 12 tháng (Bản Việt Nam miễn phí, Bản Mỹ,
+                  Sing... có phí)
+                </p>
+                <p>👉Phụ kiện theo hộp tùy theo nhà sản xuất</p>
+                <p> 👉Giảm 30% giá phụ kiện khi mua kèm máy</p>
+                <p>👉Hỗ trợ vệ sinh máy, phần mềm trọn đời</p>
+              </div>
+            </Col>
+            <Col md={6} sm={24}>
+              <div
+                style={{
+                  display: "flex",
+
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: " none",
+                  borderRadius: 10,
+                  backgroundColor: "#FFF3CD",
+                  padding: "10px 10px",
+                }}
+              >
+                <img
+                  style={{ width: 40, height: 40 }}
+                  src="https://bizweb.dktcdn.net/100/177/937/themes/881538/assets/customer-service.png?1709707792791"
+                  alt=""
+                />
+                <p style={{ fontSize: 14, paddingLeft: 10 }}>
+                  Gọi ngay <span style={{ color: "red" }}>0567.10.7979</span> /
+                  <br />
+                  <span1 style={{ color: "red" }}> 0568.10.7979</span1> / <br />
+                  <span2 style={{ color: "red" }}> 0877.10.7979</span2>
+                  để được tư <br />
+                  vấn tốt nhất!
+                </p>
+              </div>
+              <div
+                style={{
+                  marginTop: 10,
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  border: " none",
+                  borderRadius: 10,
+                  backgroundColor: "#ededed",
+                  padding: "10px 10px",
+                }}
+              >
+                <p style={{ fontSize: 14, paddingLeft: 10 }}>
+                  Tình trạng: <span style={{ color: "green" }}>Còn hàng</span>{" "}
+                  <br />
+                  Thương hiệu:&nbsp;
+                  <span1 style={{ color: "green" }}>
+                    {productDetail.data.category?.name}
+                  </span1>{" "}
+                  <br />
+                  Loại: &nbsp;
+                  <span2 style={{ color: "green" }}>
+                    {productDetail.data.type?.name}
+                  </span2>
+                </p>
+              </div>
+              <div
+                style={{
+                  marginTop: 10,
+
+                  border: " dashed yellow",
+                  borderRadius: 10,
+                  backgroundColor: "#ffffff",
+                  padding: "10px 10px",
+                }}
+              >
+                <h4>
+                  <GiftOutlined />
+                  &nbsp; Ưu Đãi
+                </h4>
+                <p style={{ fontSize: 14, paddingLeft: 10 }}>
+                  - Giảm giá sâu nhiều sản phẩm
+                  <br />- Giảm giá Phụ kiện 30% tối đa 200k khi mua kèm điện
+                  thoại
+                  <br />- Giảm 5% tối đa 500k khi thanh toán qua Kredivo, Home
+                  paylater lần đầu
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Card>
+        <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+          <Col xs={24} md={16}>
+            <Card
+              size="small"
+              title={
+                <span
+                  style={{
+                    color: "red",
+                    fontSize: "22px",
+                    padding: " 0px 20px",
+                  }}
+                >
+                  Thông tin chi tiết
+                </span>
+              }
+              bordered={false}
+              style={{
+                marginTop: 20,
+                border: "none",
+                borderRadius: 10,
+              }}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: productDetail.data.content }}
+              />
+            </Card>
+            <Card
+              size="small"
+              title="Đánh giá"
+              bordered={false}
+              style={{
+                marginTop: 20,
+                border: "none",
+                borderRadius: 10,
+              }}
+            >
+              {renderReviewForm}
+              {renderReviewList}
+            </Card>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card
+              size="small"
+              title={
+                <span
+                  style={{
+                    color: "red",
+                    fontSize: "22px",
+                    padding: " 0px 20px",
+                  }}
+                >
+                  Thông số kỹ thuật
+                </span>
+              }
+              bordered={false}
+              style={{
+                marginTop: 20,
+                border: "none",
+                borderRadius: 10,
+              }}
+            >
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: productDetail.data.configuration,
+                }}
+              />
+            </Card>
           </Col>
         </Row>
-      </Card>
-      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
-        <Col xs={24} md={16}>
-          <Card size="small" title="Thông tin sản phẩm" bordered={false}>
-            <div
-              dangerouslySetInnerHTML={{ __html: productDetail.data.content }}
-            />
-          </Card>
-          <Card
-            size="small"
-            title="Đánh giá"
-            bordered={false}
-            style={{ marginTop: 16 }}
-          >
-            {renderReviewForm}
-            {renderReviewList}
-          </Card>
-        </Col>
-        <Col xs={24} md={8}>
-          <Card size="small" title="Cấu hình" bordered={false}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: productDetail.data.configuration,
-              }}
-            />
-          </Card>
-        </Col>
-      </Row>
+        <Card
+          style={{
+            margin: "20px 60px",
+            background: "linear-gradient(#aa1090, #4666f4)",
+            border: "none",
+            borderRadius: "15px",
+          }}
+          size="small"
+          title={
+            <span
+              style={{ color: "red", fontSize: "30px", padding: " 0px 20px" }}
+            >
+              Sản phẩm liên quan
+            </span>
+          }
+          bordered={false}
+        >
+          <S.SPBCWrapper>
+            <Row gutter={[24, 24]}>{renderProductItems}</Row>
+            {productList.data.length < productList.meta.total && (
+              <Flex justify="center" style={{ marginTop: 16 }}>
+                <Button onClick={() => navigate(ROUTES.USER.PRODUCT_LIST)}>
+                  Hiển thị thêm
+                </Button>
+              </Flex>
+            )}
+          </S.SPBCWrapper>
+        </Card>
+      </S.ProductDetailContainer>
     </S.ProductDetailWrapper>
   );
 };

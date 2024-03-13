@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, GiftOutlined } from "@ant-design/icons";
 
 import { ROUTES } from "constants/routes";
 
@@ -57,11 +57,7 @@ function CartPage() {
       dataIndex: "image",
       key: "image",
       render: (text) => (
-        <img
-          src={text}
-          alt=""
-          style={{ width: "80px", height: "100px" }}
-        />
+        <img src={text} alt="" style={{ width: "80px", height: "100px" }} />
       ),
     },
     {
@@ -94,7 +90,7 @@ function CartPage() {
       dataIndex: "total",
       key: "total",
       render: (_, item) =>
-        `${(item.price * item.quantity).toLocaleString()} VNĐ`,
+        `${(item.price * item.quantity).toLocaleString()}  ₫`,
     },
     {
       title: "",
@@ -127,40 +123,112 @@ function CartPage() {
           },
         ]}
       />
-      <h2 style={{ marginBottom: 16, textAlign: "center" }}>Giỏ hàng</h2>
-      <Card size="small">
-        <Table
-          columns={tableColumn}
-          dataSource={cartList}
-          rowKey="productId"
-          pagination={false}
-        />
-      </Card>
-      <Row justify="end" style={{ margin: "24px 0" }}>
-        <Col span={8}>
-          <Card size="small" title="Tổng tiền">
-            {totalPrice.toLocaleString()} VND
-          </Card>
-        </Col>
-      </Row>
-      <Row justify="end">
-        <Space>
-          <Button
-            disabled={!cartList.length}
-            danger
-            onClick={() => handleDeleteAllCartItem()}
-          >
-            Xoá tất cả
-          </Button>
-          <Button
-            type="primary"
-            disabled={!cartList.length}
-            onClick={() => navigate(ROUTES.USER.CHECKOUT)}
-          >
-            Mua hàng
-          </Button>
-        </Space>
-      </Row>
+      <S.CartListContainer>
+        <h2 style={{ marginBottom: 16, textAlign: "center" }}>Giỏ hàng</h2>
+        <Card
+          size="small"
+          style={{
+            marginTop: 20,
+            border: "none",
+            borderRadius: 10,
+          }}
+        >
+          <Row gutter={[24, 24]}>
+            <Col span={16}>
+              <Table
+                columns={tableColumn}
+                dataSource={cartList}
+                rowKey="productId"
+                pagination={false}
+              />
+            </Col>
+
+            <Col span={8}>
+              <div
+                style={{
+                  marginTop: 10,
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  border: " none",
+                  borderRadius: 10,
+                  height: 70,
+                  backgroundColor: "#F9420E",
+                  padding: "10px 10px",
+                }}
+              >
+                <h4 style={{ color: "white" }}>TỔNG TIỀN</h4>
+                <p
+                  style={{
+                    fontSize: 14,
+                    paddingLeft: 10,
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {totalPrice.toLocaleString()} ₫
+                </p>
+              </div>
+              <S.ButtonTTContainer>
+                <Button
+                  style={{
+                    marginTop: 10,
+                    backgroundColor: "#f42626",
+                    border: " none",
+                    borderRadius: 10,
+                    height: 70,
+                    width: "100%",
+                    fontSize: 20,
+                  }}
+                  type="primary"
+                  disabled={!cartList.length}
+                  onClick={() => navigate(ROUTES.USER.CHECKOUT)}
+                >
+                  THANH TOÁN
+                </Button>
+                <Button
+                  style={{
+                    marginTop: 10,
+
+                    backgroundColor: "#343A40",
+                    border: " none",
+                    borderRadius: 10,
+                    height: 40,
+                    width: "100%",
+                    fontSize: 20,
+                  }}
+                  disabled={!cartList.length}
+                  onClick={() => handleDeleteAllCartItem()}
+                >
+                  XOÁ TẤT CẢ
+                </Button>
+              </S.ButtonTTContainer>
+              <div
+                style={{
+                  marginTop: 10,
+
+                  border: " dashed yellow",
+                  borderRadius: 10,
+                  backgroundColor: "#ffffff",
+                  padding: "10px 10px",
+                }}
+              >
+                <h4 style={{ color: "#cbbe09" }}>
+                  <GiftOutlined />
+                  &nbsp; Ưu Đãi
+                </h4>
+                <p style={{ fontSize: 14, paddingLeft: 10 }}>
+                  - Giảm giá sâu nhiều sản phẩm
+                  <br />- Giảm giá Phụ kiện 30% tối đa 200k khi mua kèm điện
+                  thoại
+                  <br />- Giảm 5% tối đa 500k khi thanh toán qua Kredivo, Home
+                  paylater lần đầu
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Card>
+      </S.CartListContainer>
     </S.CartListWrapper>
   );
 }

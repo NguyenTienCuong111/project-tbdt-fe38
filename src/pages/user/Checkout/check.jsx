@@ -30,19 +30,19 @@ import { orderProductRequest } from "../../../redux/slicers/order.slice";
 import * as S from "./styles";
 
 function CheckoutPage() {
-  const [cartItemCount, setCartItemCount] = useState(0);
+  // const [cartItemCount, setCartItemCount] = useState(0);
 
-  // Lấy số lượng sản phẩm từ localStorage khi component được tạo
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartList"));
-    if (cartItems) {
-      const itemCount = cartItems.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
-      setCartItemCount(itemCount);
-    }
-  }, []);
+  // // Lấy số lượng sản phẩm từ localStorage khi component được tạo
+  // useEffect(() => {
+  //   const cartItems = JSON.parse(localStorage.getItem("cartList"));
+  //   if (cartItems) {
+  //     const itemCount = cartItems.reduce(
+  //       (total, item) => total + item.quantity,
+  //       0
+  //     );
+  //     setCartItemCount(itemCount);
+  //   }
+  // }, []);
   const [checkoutForm] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,9 +93,11 @@ function CheckoutPage() {
       title: "Tổng",
       dataIndex: "total",
       key: "total",
-      render: (_, item) => `${(item.price * item.quantity).toLocaleString()}₫`,
+      render: (_, item) =>
+        `${(item.price * item.quantity).toLocaleString()} VND`,
     },
   ];
+
   const handleSubmitCheckoutForm = (values) => {
     const cityData = cityList.data.find(
       (city) => city.code === values.cityCode
@@ -323,19 +325,6 @@ function CheckoutPage() {
                   </Col>
                 </Row>
               </Card>
-
-              <Row justify="space-between">
-                <Button onClick={() => navigate(ROUTES.USER.CART)}>
-                  Quay về giỏ hàng
-                </Button>
-                <Button
-                  onClick={() => navigate(ROUTES.USER.PAYMENTSUCCESS)}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Đặt hàng
-                </Button>
-              </Row>
             </Form>
           </Col>
           <Col span={10}>
@@ -349,7 +338,7 @@ function CheckoutPage() {
                     padding: " 0px 20px",
                   }}
                 >
-                  Đơn hàng ({cartItemCount} sản phẩm)
+                  {/* Đơn hàng ({cartItemCount} sản phẩm) */}
                 </span>
               }
               style={{ marginBottom: 24 }}
@@ -362,6 +351,8 @@ function CheckoutPage() {
                 pagination={false}
               />
             </Card>
+          </Col>
+          <Row justify="space-between">
             <div
               style={{
                 display: "flex",
@@ -377,7 +368,19 @@ function CheckoutPage() {
               <h3>Tổng cộng: &nbsp;</h3>
               <h3>{totalPrice.toLocaleString()} ₫</h3>
             </div>
-          </Col>
+            <Space style={{ marginTop: 10 }}>
+              <Button onClick={() => navigate(ROUTES.USER.CART)}>
+                Quay về giỏ hàng
+              </Button>
+              <Button
+                onClick={() => navigate(ROUTES.USER.PAYMENTSUCCESS)}
+                type="primary"
+                htmlType="submit"
+              >
+                Đặt hàng
+              </Button>
+            </Space>
+          </Row>
         </Row>
       </S.CheckoutContainer>
     </S.CheckoutWrapper>

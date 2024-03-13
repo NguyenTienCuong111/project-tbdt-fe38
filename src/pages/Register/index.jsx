@@ -46,112 +46,122 @@ const RegisterPage = () => {
 
   return (
     <S.RegisterContainer>
-      <S.RegisterForm>
-        <S.RegisterLogo>
-          <S.RegisterLogoImage
-            src="http://mauweb.monamedia.net/hanoicomputer/wp-content/uploads/2019/06/logo-final.png"
-            alt=""
-          />
-        </S.RegisterLogo>
-        <S.RegisterText>Register</S.RegisterText>
-        <Form
-          style={{ marginTop: 10 }}
-          form={registerForm}
-          name="registerForm"
-          layout="vertical"
-          onFinish={(values) => handleSubmit(values)}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Họ và tên"
-            name="fullName"
-            rules={[
-              {
-                required: true,
-                whitespace: true,
-                message: "Họ và tên là bắt buộc",
-              },
-              {
-                type: "string",
-                min: 3,
-                max: 32,
-                message: "Họ và tên phải từ 3-32 kí tự",
-              },
-            ]}
+      <S.RegisterFormContainer>
+        <S.RegisterForm>
+          <S.RegisterLogo>
+            <S.RegisterLogoImage
+              src="http://mauweb.monamedia.net/hanoicomputer/wp-content/uploads/2019/06/logo-final.png"
+              alt=""
+            />
+          </S.RegisterLogo>
+          <S.RegisterText>Register</S.RegisterText>
+          <Form
+            style={{ marginTop: 10 }}
+            form={registerForm}
+            name="registerForm"
+            layout="vertical"
+            onFinish={(values) => handleSubmit(values)}
+            autoComplete="off"
           >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                whitespace: true,
-                message: "Email là bắt buộc",
-              },
-              {
-                type: "email",
-                message: "Email không đúng định dạng",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Mật khẩu"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Mật khẩu là bắt buộc",
-              },
-              // {
-              //   pattern:
-              //     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/g,
-              //   message: "Mật khẩu yếu",
-              // },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            label="Xác nhận mật khẩu"
-            name="confirmPassword"
-            rules={[
-              {
-                required: true,
-                message: "Mật khẩu là bắt buộc",
-              },
-              (params) => ({
-                validator(_, value) {
-                  if (!value || params.getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error("Mật khẩu xác nhận không khớp")
-                  );
+            <Form.Item
+              label="Họ và tên"
+              name="fullName"
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: "Họ và tên là bắt buộc",
                 },
-              }),
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+                {
+                  type: "string",
+                  min: 3,
+                  max: 32,
+                  message: "Họ và tên phải từ 3-32 kí tự",
+                },
+              ]}
+            >
+              <Input style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            block
-            loading={registerData.loading}
-          >
-            Đăng ký
-          </Button>
-        </Form>
-      </S.RegisterForm>
-      <S.RegisterBanner src="https://www.dynexbattery.com/wp-content/themes/dynex/images/warranty-registration-banner-mobile.jpg"></S.RegisterBanner>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  whitespace: true,
+                  message: "Email là bắt buộc",
+                },
+                {
+                  type: "email",
+                  message: "Email không đúng định dạng",
+                },
+              ]}
+            >
+              <Input style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
+
+            <Form.Item
+              label="Mật khẩu"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Mật khẩu là bắt buộc",
+                },
+                // {
+                //   pattern:
+                //     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/g,
+                //   message: "Mật khẩu yếu",
+                // },
+              ]}
+            >
+              <Input.Password style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
+
+            <Form.Item
+              label="Xác nhận mật khẩu"
+              name="confirmPassword"
+              rules={[
+                {
+                  required: true,
+                  message: "Mật khẩu là bắt buộc",
+                },
+                (params) => ({
+                  validator(_, value) {
+                    if (!value || params.getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error("Mật khẩu xác nhận không khớp")
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input.Password style={{ borderRadius: "10px", height: 40 }} />
+            </Form.Item>
+
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              loading={registerData.loading}
+              style={{
+                borderRadius: "10px",
+                height: 40,
+                color: "#000000",
+                fontWeight: "bold",
+              }}
+            >
+              Đăng ký
+            </Button>
+          </Form>
+        </S.RegisterForm>
+      </S.RegisterFormContainer>
+      <S.RegisterBannerContainer>
+        <S.RegisterBanner src="https://www.dynexbattery.com/wp-content/themes/dynex/images/warranty-registration-banner-mobile.jpg"></S.RegisterBanner>
+      </S.RegisterBannerContainer>
     </S.RegisterContainer>
   );
 };

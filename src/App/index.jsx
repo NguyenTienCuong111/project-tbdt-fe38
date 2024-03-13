@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ConfigProvider } from "antd";
@@ -35,6 +35,7 @@ import { getUserInfoRequest } from "../redux/slicers/auth.slice";
 
 function App() {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -43,6 +44,9 @@ function App() {
       dispatch(getUserInfoRequest({ id: parseInt(tokenData.sub) }));
     }
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <ConfigProvider

@@ -142,7 +142,7 @@ function ProductListPage() {
                 overflow: "hidden",
                 border: "solid 0px #ccc",
                 borderRadius: "10px",
-                boxShadow: "2px 8px 12px rgba(0, 0, 0, 0.1)",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
               }}
               cover={<S.CartImg alt="example" src={item.image} />}
             >

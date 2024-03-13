@@ -184,6 +184,7 @@ const ProductDetailPage = () => {
                   overflow: "hidden",
                   border: "none",
                   borderRadius: "10px",
+                  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
                 }}
                 cover={<S.CartImg alt="example" src={item.image} />}
               >

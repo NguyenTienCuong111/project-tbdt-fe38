@@ -27,6 +27,16 @@ function HomePage() {
     autoplay: true,
     autoplaySpeed: 1000,
   };
+  var settings2 = {
+    dots: false,
+    infinite: true,
+
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 1000,
+  };
   const { search } = useLocation();
   const searchParams = useMemo(() => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
@@ -64,6 +74,8 @@ function HomePage() {
                 overflow: "hidden",
                 border: "none",
                 borderRadius: "10px",
+              
+                boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
               }}
               cover={<S.CartImg alt="example" src={item.image} />}
             >
@@ -141,100 +153,153 @@ function HomePage() {
         }
         bordered={false}
       >
-        <S.KHDGWrapper>
-          <div
-            style={{
-              border: "solid 2px #ccc",
-              borderRadius: "10px",
-
-              padding: "10px 20px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <img
-                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-                src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_1.jpg?1709707792791"
-                alt=""
-              />
-              <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>
-                Nguyễn thị lệ
-              </h2>
+        <Slider {...settings2}>
+          <div>
+            <div
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                padding: "10px 20px",
+                margin: "10px 20px",
+              }}
+            >
+              <div style={{ display: "flex" }}>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_1.jpg?1709707792791"
+                  alt=""
+                />
+                <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>
+                  Nguyễn thị lệ
+                </h2>
+              </div>
+              <p style={{ fontSize: 16 }}>
+                Mình rất ưng khi đến MONA Computer. Ở đây có rất nhiều sản phẩm
+                phong phú, tha hồ lựa chọn. Nhân viên chuyên nghiệp, nhiệt tình.
+                Chúc MONA Computer ngày càng phát triển.
+              </p>
             </div>
-            <p style={{ fontSize: 16 }}>
-              Mình rất ưng khi đến MONA Computer. Ở đây có rất nhiều sản phẩm
-              phong phú, tha hồ lựa chọn. Nhân viên chuyên nghiệp, nhiệt tình.
-              Chúc MONA Computer ngày càng phát triển.
-            </p>
           </div>
-
-          <div
-            style={{
-              border: "solid 2px #ccc",
-              borderRadius: "10px",
-
-              padding: "10px 20px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <img
-                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-                src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_2.jpg?1709707792791"
-                alt=""
-              />
-              <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Chị Hương</h2>
+          <div>
+            <div
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                padding: "10px 20px",
+                margin: "10px 20px",
+              }}
+            >
+              <div style={{ display: "flex" }}>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_2.jpg?1709707792791"
+                  alt=""
+                />
+                <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Chị Hương</h2>
+              </div>
+              <p style={{ fontSize: 16 }}>
+                Tôi đem điện thoại đến đây kiểm tra sửa hna sạc, thợ xem bảo chỉ
+                bẩn vệ sinh là xài dc, Shop làm ăn rất uy tin, nếu vào chổ kac
+                chắc bị sửa lấy tiền rồi, cảm ơn shop, sau này sẽ ủng hộ thêm
+              </p>
             </div>
-            <p style={{ fontSize: 16 }}>
-              Tôi đem điện thoại đến đây kiểm tra sửa hna sạc, thợ xem bảo chỉ
-              bẩn vệ sinh là xài dc, Shop làm ăn rất uy tin, nếu vào chổ kac
-              chắc bị sửa lấy tiền rồi, cảm ơn shop, sau này sẽ ủng hộ thêm
-            </p>
           </div>
-
-          <div
-            style={{
-              border: "solid 2px #ccc",
-              borderRadius: "10px",
-
-              padding: "10px 20px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <img
-                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-                src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_3.jpg?1709707792791"
-                alt=""
-              />
-              <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Em Hồng</h2>
+          <div>
+            <div
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                padding: "10px 20px",
+                margin: "10px 20px",
+              }}
+            >
+              <div style={{ display: "flex" }}>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_3.jpg?1709707792791"
+                  alt=""
+                />
+                <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Em Hồng</h2>
+              </div>
+              <p style={{ fontSize: 16 }}>
+                Mình mua điện thoại shop tư vấn bán rất nhiệt tình, xài mấy
+                tháng rồi cảm thấy máy rất mượt, dù máy cũ nhunge cũng xài ngon
+              </p>
             </div>
-            <p style={{ fontSize: 16 }}>
-              Mình mua điện thoại shop tư vấn bán rất nhiệt tình, xài mấy tháng
-              rồi cảm thấy máy rất mượt, dù máy cũ nhunge cũng xài ngon
-            </p>
           </div>
-
-          <div
-            style={{
-              border: "solid 2px #ccc",
-              borderRadius: "10px",
-
-              padding: "10px 20px",
-            }}
-          >
-            <div style={{ display: "flex" }}>
-              <img
-                style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-                src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_4.jpg?1709707792791"
-                alt=""
-              />
-              <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Chú Tâm</h2>
+          <div>
+            <div
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                padding: "10px 20px",
+                margin: "10px 20px",
+              }}
+            >
+              <div style={{ display: "flex" }}>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_4.jpg?1709707792791"
+                  alt=""
+                />
+                <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Chú Tâm</h2>
+              </div>
+              <p style={{ fontSize: 16 }}>
+                Mình chạy Grap, cần điện thoại tầm trung mà mượt để sử dụng, tôi
+                đã mua cây Samsung M51 mới tại MONA Computer, xài rất ok, mượt,
+                pin lâu hết
+              </p>
             </div>
-            <p style={{ fontSize: 16 }}>
-              Mình chạy Grap, cần điện thoại tầm trung mà mượt để sử dụng, tôi
-              đã mua cây Samsung M51 mới tại MONA Computer, xài rất ok, mượt,
-              pin lâu hết
-            </p>
           </div>
-        </S.KHDGWrapper>
+          <div>
+            <div
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                padding: "10px 20px",
+                margin: "10px 20px",
+              }}
+            >
+              <div style={{ display: "flex" }}>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                  }}
+                  src="https://bizweb.dktcdn.net/thumb/small/100/177/937/themes/881538/assets/ykkh_5.jpg?1710235579333"
+                  alt=""
+                />
+                <h2 style={{ paddingLeft: 10, color: "#e71b1b" }}>Cô My</h2>
+              </div>
+              <p style={{ fontSize: 16 }}>
+                Mình hay dán cường lực màn hình và mua ốp lưng của shop, hàng
+                shop bán uy đẹp, nhiều mẫu hot trend cute hột me.
+              </p>
+            </div>
+          </div>
+        </Slider>
       </Card>
       <Card
         style={{

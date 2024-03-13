@@ -9,7 +9,10 @@ import {
   CustomerServiceOutlined,
   ContactsOutlined,
   MobileOutlined,
+  CaretDownOutlined,
+  CameraOutlined,
 } from "@ant-design/icons";
+import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useMemo, useState } from "react";
@@ -24,6 +27,15 @@ import { logoutRequest } from "../../../redux/slicers/auth.slice";
 import * as S from "./styles";
 
 function Header() {
+  const StyledLink = styled(Link)`
+    color: #393939;
+    text-decoration: none;
+    padding: 0px 5px;
+
+    &:hover {
+      color: red;
+    }
+  `;
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { cartList } = useSelector((state) => state.cart);
@@ -75,25 +87,16 @@ function Header() {
             allowClear
           />
           <S.BlogBlock>
-            <Link
+            <StyledLink>Công nghệ 24h</StyledLink>
+            <StyledLink
               style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "black",
-              }}
-            >
-              Công nghệ 24h
-            </Link>
-            <Link
-              style={{
-                textDecoration: "none",
-                borderLeft: "solid",
-                padding: "0px 5px",
-                color: "black",
+               
+                borderLeft: "solid black",
+                
               }}
             >
               Khuyến mãi mới
-            </Link>
+            </StyledLink>
           </S.BlogBlock>
           <S.ListStore>
             Danh sách
@@ -162,12 +165,7 @@ function Header() {
       <S.HeaderNavigation>
         <S.HeaderNavigationUl>
           <S.HeaderNavigationLi>
-            <Link
-              style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "##393939",
-              }}
+            <StyledLink
               to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
                 typeId: [2],
               })}`}
@@ -176,61 +174,63 @@ function Header() {
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>
                 Điện thoại
               </span>
-            </Link>
+            </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <Link
-              style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "#393939",
-              }}
+            <StyledLink
               to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
                 typeId: [1],
               })}`}
             >
               <LaptopOutlined />
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Laptop</span>
-            </Link>
+            </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <Link
-              style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "#393939",
-              }}
+            <StyledLink
               to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
                 typeId: [3],
               })}`}
             >
               <CustomerServiceOutlined />
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Tai nghe</span>
-            </Link>
+            </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <Link
-              style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "#393939",
-              }}
-            >
+            <StyledLink>
+              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Ipad</span>
+              <CaretDownOutlined />
+            </StyledLink>
+          </S.HeaderNavigationLi>
+          <S.HeaderNavigationLi>
+            <StyledLink>
+              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Watch</span>
+              <CaretDownOutlined />
+            </StyledLink>
+          </S.HeaderNavigationLi>
+          <S.HeaderNavigationLi>
+            <StyledLink>
+              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Âm thanh</span>
+              <CaretDownOutlined />
+            </StyledLink>
+          </S.HeaderNavigationLi>
+          <S.HeaderNavigationLi>
+            <StyledLink>
+              <CameraOutlined />
+              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Camera</span>
+            </StyledLink>
+          </S.HeaderNavigationLi>
+          <S.HeaderNavigationLi>
+            <StyledLink>
               <CreditCardOutlined />
-              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Tin tức</span>
-            </Link>
+              <span style={{ paddingLeft: 5, fontSize: "16px" }}>Tin tức </span>
+            </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>
-            <Link
-              style={{
-                textDecoration: "none",
-                padding: "0px 5px",
-                color: "#393939",
-              }}
-            >
+            <StyledLink>
               <ContactsOutlined />
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Liên hệ</span>
-            </Link>
+            </StyledLink>
           </S.HeaderNavigationLi>
         </S.HeaderNavigationUl>
       </S.HeaderNavigation>

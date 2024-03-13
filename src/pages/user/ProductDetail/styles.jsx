@@ -18,7 +18,7 @@ export const CartImg = styled.img`
   margin-top: 10px !important;
   transition: transform 0.5s ease;
   &:hover {
-    transform: translateY(-10px);
+    transform: scale(1.1); /* Phóng to 110% */
   }
 `;
 export const DivWrapper = styled.div`

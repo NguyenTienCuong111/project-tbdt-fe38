@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Col, Row } from "antd";
+import { SafetyOutlined } from "@ant-design/icons";
 
 import { changePasswordRequest } from "../../../redux/slicers/auth.slice";
 
@@ -36,66 +37,83 @@ function ChangePassword() {
   };
 
   return (
-    <Form
-      form={changePasswordForm}
-      name="changePasswordForm"
-      layout="vertical"
-      onFinish={(values) => handleChangePassword(values)}
-      autoComplete="off"
-    >
-      <Form.Item
-        label="Mật khẩu cũ"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Vui lòng nhập mật khẩu cũ!",
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
-        label="Mật khẩu mới"
-        name="newPassword"
-        rules={[
-          {
-            required: true,
-            message: "Vui lòng nhập mật khẩu mới!",
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
-        label="Xác nhận mật khẩu mới"
-        name="confirmNewPassword"
-        rules={[
-          {
-            required: true,
-            message: "Vui lòng xác nhận mật khẩu mới!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("newPassword") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject("Mật khẩu không khớp!");
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Button
-        type="primary"
-        htmlType="submit"
-        block
-        loading={changePasswordData.load}
-      >
-        Thay đổi
-      </Button>
-    </Form>
+    <Row gutter={[16, 16]}>
+      <Col md={18}>
+        <Form
+          form={changePasswordForm}
+          name="changePasswordForm"
+          layout="vertical"
+          onFinish={(values) => handleChangePassword(values)}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Mật khẩu cũ"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập mật khẩu cũ!",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label="Mật khẩu mới"
+            name="newPassword"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập mật khẩu mới!",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label="Xác nhận mật khẩu mới"
+            name="confirmNewPassword"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng xác nhận mật khẩu mới!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("newPassword") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject("Mật khẩu không khớp!");
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            block
+            loading={changePasswordData.load}
+          >
+            Xác nhận
+          </Button>
+        </Form>
+      </Col>
+      <Col md={6}>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <SafetyOutlined style={{ fontSize: 220, color: "#F9420E" }} />
+        </div>
+      </Col>
+    </Row>
   );
 }
 

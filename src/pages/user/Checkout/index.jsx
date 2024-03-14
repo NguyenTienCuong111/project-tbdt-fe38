@@ -84,13 +84,13 @@ function CheckoutPage() {
       ),
     },
     {
-      title: "Tên",
+      title: "Sản phẩm",
       dataIndex: "name",
       key: "name",
     },
 
     {
-      title: "Tổng",
+      title: "Tổng giá",
       dataIndex: "total",
       key: "total",
       render: (_, item) => `${(item.price * item.quantity).toLocaleString()}₫`,
@@ -162,13 +162,14 @@ function CheckoutPage() {
               </Link>
             ),
           },
+          
           {
             title: "Thủ tục thanh toán",
           },
         ]}
       />
       <S.CheckoutContainer>
-        <h2 style={{ marginBottom: 16, textAlign: "center" }}>
+        <h2 style={{ marginBottom: 16, textAlign: "center", color: "#1650ef" }}>
           Thủ tục thanh toán
         </h2>
         <Row gutter={[16, 16]}>

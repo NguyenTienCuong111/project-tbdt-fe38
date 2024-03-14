@@ -53,8 +53,17 @@ import { getProductListRequest } from "../../../redux/slicers/product.slice";
 import { PRODUCT_LIMIT1 } from "constants/paging";
 
 import * as S from "./styles";
+import styled from "styled-components";
 
 const ProductDetailPage = () => {
+  const StyledButton = styled(Button)`
+    background-color: #f6f627;
+
+    &:hover {
+      background-color: #1049f5;
+   
+    }
+  `;
   const settings = {
     dots: true,
     infinite: true,
@@ -425,14 +434,13 @@ const ProductDetailPage = () => {
                 />
               </div>
               <Space>
-                <Button
+                <StyledButton
                   size="large"
-                  type="primary"
                   icon={<ShoppingCartOutlined />}
                   onClick={() => handleAddToCart()}
                 >
                   Thêm vào giỏ
-                </Button>
+                </StyledButton>
                 <Button
                   size="large"
                   type="text"

@@ -31,7 +31,7 @@ const OrderHistories = () => {
       title: "Tổng tiền",
       dataIndex: "totalPrice",
       key: "totalPrice",
-      render: (totalPrice) => `${totalPrice.toLocaleString()} VND`,
+      render: (totalPrice) => `${totalPrice.toLocaleString()} ₫`,
     },
     {
       title: "Ngày đặt hàng",

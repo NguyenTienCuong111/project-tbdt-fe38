@@ -108,9 +108,9 @@ function HomePage() {
         size="small"
         title={
           <span
-            style={{ color: "red", fontSize: "30px", padding: " 0px 20px" }}
+            style={{ color: "red", fontSize: "26px", padding: " 0px 20px" }}
           >
-            Sản phẩm bán chạy
+            SẢN PHẨM BÁN CHẠY
           </span>
         }
         bordered={false}
@@ -142,13 +142,14 @@ function HomePage() {
           background: "linear-gradient(#e3e3dc, #e8f446)",
           border: "none",
           borderRadius: "15px",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         }}
         size="small"
         title={
           <span
-            style={{ color: "red", fontSize: "30px", padding: " 0px 20px" }}
+            style={{ color: "red", fontSize: "26px", padding: " 0px 20px" }}
           >
-            Khách hàng đánh giá
+            KHÁCH HÀNG ĐÁNH GIÁ
           </span>
         }
         bordered={false}
@@ -307,13 +308,14 @@ function HomePage() {
           background: "white",
           border: "none",
           borderRadius: "15px",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         }}
         size="small"
         title={
           <span
-            style={{ color: "black", fontSize: "30px", padding: " 0px 20px" }}
+            style={{ color: "black", fontSize: "26px", padding: " 0px 20px" }}
           >
-            Hình ảnh khách hàng
+            HÌNH ẢNH KHÁCH HÀNG
           </span>
         }
         bordered={false}
@@ -377,13 +379,14 @@ function HomePage() {
           background: "white",
           border: "none",
           borderRadius: "15px",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         }}
         size="small"
         title={
           <span
-            style={{ color: "black", fontSize: "30px", padding: " 0px 20px" }}
+            style={{ color: "black", fontSize: "26px", padding: " 0px 20px" }}
           >
-            Tin tức
+            TIN TỨC
           </span>
         }
         bordered={false}
@@ -400,8 +403,8 @@ function HomePage() {
             >
               <div>
                 <img
-                  style={{ width: 300 }}
-                  src="https://bizweb.dktcdn.net/100/177/937/articles/tai-xuong-7748ff70-541f-428f-8023-9f943f9922fc.jpg?v=1710041469867"
+                  style={{ width: 400 }}
+                  src="https://bizweb.dktcdn.net/100/177/937/articles/chupanhdem1-1280x720-800-resize.jpg?v=1710381691757"
                   alt=""
                 />
               </div>

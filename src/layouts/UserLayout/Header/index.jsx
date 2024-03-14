@@ -1,4 +1,13 @@
-import { Dropdown, Space, Badge, Button } from "antd";
+import {
+  Dropdown,
+  Space,
+  Badge,
+  Button,
+  Input,
+  Tag,
+  Popover,
+  List,
+} from "antd";
 
 import {
   UserOutlined,
@@ -16,7 +25,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useMemo, useState } from "react";
-import { Input, Row, Col } from "antd";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -27,6 +35,7 @@ import { logoutRequest } from "../../../redux/slicers/auth.slice";
 import * as S from "./styles";
 
 function Header() {
+  const { cartList } = useSelector((state) => state.cart);
   const StyledLink = styled(Link)`
     color: #393939;
     text-decoration: none;
@@ -37,8 +46,9 @@ function Header() {
     }
   `;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  const { cartList } = useSelector((state) => state.cart);
+
   const { search } = useLocation();
   const searchParams = useMemo(() => {
     const params = qs.parse(search, { ignoreQueryPrefix: true });
@@ -52,8 +62,6 @@ function Header() {
     };
   }, [search]);
   const [searchQuery, setSearchQuery] = useState(searchParams.keyword);
-
-  const navigate = useNavigate();
 
   const handleFilter = (key, value) => {
     const newFilterParams = { ...searchParams, [key]: value };
@@ -104,14 +112,55 @@ function Header() {
           {userInfo.data.id ? (
             <Space>
               <Link to={ROUTES.USER.CART}>
-                <Badge count={cartList.length}>
-                  <S.Cart>
-                    <ShoppingCartOutlined
-                      style={{ fontSize: 24, color: "#414141" }}
+                <Popover
+                  placement="bottomRight"
+                  title="Giỏ hàng"
+                  content={
+                    <List
+                      dataSource={cartList}
+                      renderItem={(item) => (
+                        <List.Item>
+                          <Badge
+                            style={{ backgroundColor: "#0854ce" }}
+                            count={item.quantity}
+                          >
+                            <img
+                              src={item.image}
+                              alt=""
+                              style={{ width: "40px", height: "50px" }}
+                            />
+                          </Badge>
+                          <span style={{ paddingLeft: 10 }}>{item.name}</span>
+                          <span style={{ marginLeft: "auto", color: "red" }}>
+                            {item.price} ₫
+                          </span>
+                        </List.Item>
+                      )}
+                      footer={
+                        <div style={{ textAlign: "right" }}>
+                          Tổng cộng:
+                          <Tag style={{ fontSize: 16 }} color="#87d068">
+                            {cartList.reduce(
+                              (total, item) =>
+                                total + item.price * item.quantity,
+                              0
+                            )}
+                            ₫
+                          </Tag>
+                        </div>
+                      }
                     />
-                    <S.CartInfo>cường</S.CartInfo>
-                  </S.Cart>
-                </Badge>
+                  }
+                  trigger="hover"
+                >
+                  <Badge count={cartList.length}>
+                    <S.Cart>
+                      <ShoppingCartOutlined
+                        style={{ fontSize: 24, color: "#414141" }}
+                      />
+                    </S.Cart>
+                  </Badge>
+                </Popover>
               </Link>
               <Dropdown
                 menu={{
@@ -156,7 +205,17 @@ function Header() {
               </Dropdown>
             </Space>
           ) : (
-            <Button onClick={() => navigate(ROUTES.LOGIN)}>Đăng nhập</Button>
+            <Button
+              style={{
+                backgroundColor: "#f5ef9e",
+                border: "none",
+                borderRadius: "10px",
+              }}
+              onClick={() => navigate(ROUTES.LOGIN)}
+            >
+              <UserOutlined />
+              Đăng nhập
+            </Button>
           )}
         </S.HeaderContainerMenu>
       </S.HeaderContainer>
@@ -200,8 +259,8 @@ function Header() {
                 typeId: [4],
               })}`}
             >
+              <MobileOutlined />
               <span style={{ paddingLeft: 5, fontSize: "16px" }}>Ipad</span>
-              <CaretDownOutlined />
             </StyledLink>
           </S.HeaderNavigationLi>
           <S.HeaderNavigationLi>

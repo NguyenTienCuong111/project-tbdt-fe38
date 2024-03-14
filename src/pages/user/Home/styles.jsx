@@ -92,8 +92,8 @@ export const ProductTitle = styled.h3`
   font-size: 16px;
 `;
 export const Img = styled.img`
-  width: 150px !important;
-  height: 50px !important;
+  width: 200px !important;
+  height: 70px !important;
 `;
 
 export const CartImg = styled.img`

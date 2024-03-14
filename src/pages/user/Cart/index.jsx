@@ -22,8 +22,16 @@ import {
 } from "../../../redux/slicers/cart.slice";
 
 import * as S from "./styles";
+import styled from "styled-components";
 
 function CartPage() {
+  const StyledButton = styled(Button)`
+    background-color: #f42626;
+
+    &:hover {
+      background-color: #f5e510;
+    }
+  `;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -53,7 +61,7 @@ function CartPage() {
 
   const tableColumn = [
     {
-      title: "Hình ảnh",
+      title: "",
       dataIndex: "image",
       key: "image",
       render: (text) => (
@@ -61,7 +69,7 @@ function CartPage() {
       ),
     },
     {
-      title: "Tên sản phẩm",
+      title: "Sản phẩm",
       dataIndex: "name",
       key: "name",
     },
@@ -70,7 +78,7 @@ function CartPage() {
       dataIndex: "price",
       key: "price",
       render: (_, item) => {
-        return `${item.price.toLocaleString()} VNĐ`;
+        return `${item.price.toLocaleString()}  ₫`;
       },
     },
     {
@@ -124,7 +132,7 @@ function CartPage() {
         ]}
       />
       <S.CartListContainer>
-        <h2 style={{ marginBottom: 16, textAlign: "center" }}>Giỏ hàng</h2>
+        <h2 style={{ marginBottom: 16, textAlign: "center" , color: "red" }}>Giỏ hàng</h2>
         <Card
           size="small"
           style={{
@@ -170,13 +178,13 @@ function CartPage() {
                 </p>
               </div>
               <S.ButtonTTContainer>
-                <Button
+                <StyledButton
                   style={{
                     marginTop: 10,
-                    backgroundColor: "#f42626",
+
                     border: " none",
                     borderRadius: 10,
-                    height: 70,
+                    height: 60,
                     width: "100%",
                     fontSize: 20,
                   }}
@@ -185,7 +193,7 @@ function CartPage() {
                   onClick={() => navigate(ROUTES.USER.CHECKOUT)}
                 >
                   THANH TOÁN
-                </Button>
+                </StyledButton>
                 <Button
                   style={{
                     marginTop: 10,

@@ -61,7 +61,6 @@ const ProductDetailPage = () => {
 
     &:hover {
       background-color: #1049f5;
-   
     }
   `;
   const settings = {
@@ -634,7 +633,7 @@ const ProductDetailPage = () => {
         </Row>
         <Card
           style={{
-            margin: "20px 60px",
+            marginTop: 20,
             background: "linear-gradient(#aa1090, #4666f4)",
             border: "none",
             borderRadius: "15px",

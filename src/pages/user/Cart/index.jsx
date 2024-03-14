@@ -132,7 +132,9 @@ function CartPage() {
         ]}
       />
       <S.CartListContainer>
-        <h2 style={{ marginBottom: 16, textAlign: "center" , color: "red" }}>Giỏ hàng</h2>
+        <h2 style={{ marginBottom: 16, textAlign: "center", color: "red" }}>
+          Giỏ hàng
+        </h2>
         <Card
           size="small"
           style={{
@@ -142,7 +144,7 @@ function CartPage() {
           }}
         >
           <Row gutter={[24, 24]}>
-            <Col span={16}>
+            <Col xs={24} md={16} span={16}>
               <Table
                 columns={tableColumn}
                 dataSource={cartList}
@@ -151,7 +153,7 @@ function CartPage() {
               />
             </Col>
 
-            <Col span={8}>
+            <Col xs={24} md={8} span={8}>
               <div
                 style={{
                   marginTop: 10,

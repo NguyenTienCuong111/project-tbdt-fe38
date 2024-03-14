@@ -162,7 +162,7 @@ function CheckoutPage() {
               </Link>
             ),
           },
-          
+
           {
             title: "Thủ tục thanh toán",
           },
@@ -173,7 +173,7 @@ function CheckoutPage() {
           Thủ tục thanh toán
         </h2>
         <Row gutter={[16, 16]}>
-          <Col span={14}>
+          <Col xs={24} md={14} span={14}>
             <Form
               name="checkoutForm"
               form={checkoutForm}
@@ -339,7 +339,7 @@ function CheckoutPage() {
               </Row>
             </Form>
           </Col>
-          <Col span={10}>
+          <Col xs={24} md={10} span={10}>
             <Card
               size="small"
               title={

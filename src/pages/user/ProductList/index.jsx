@@ -242,7 +242,7 @@ function ProductListPage() {
       </div>
       <S.ProductListContainer>
         <Row style={{ marginTop: 20 }} gutter={[16, 16]}>
-          <Col style={{ padding: "10px 20px" }} span={6}>
+          <Col xs={24} md={6} style={{ padding: "10px 20px" }} span={6}>
             <Card title="Bộ lọc" size="small">
               <S.DeviceWrapper>
                 <S.DevicePhoneWrappe

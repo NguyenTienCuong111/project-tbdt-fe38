@@ -91,7 +91,7 @@ function Header() {
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             value={searchQuery}
-            placeholder="Gõ từ khoá tìm kiếm"
+            placeholder="Gõ từ khoá tìm kiếm "
             allowClear
           />
           <S.BlogBlock>
@@ -131,7 +131,13 @@ function Header() {
                             />
                           </Badge>
                           <span style={{ paddingLeft: 10 }}>{item.name}</span>
-                          <span style={{ marginLeft: "auto", color: "red" }}>
+                          <span
+                            style={{
+                              marginLeft: "auto",
+                              color: "red",
+                              paddingLeft: 10,
+                            }}
+                          >
                             {item.price} ₫
                           </span>
                         </List.Item>

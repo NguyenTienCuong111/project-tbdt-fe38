@@ -36,7 +36,6 @@ export const DivWrapper = styled.div`
   }
 `;
 export const SPBCWrapper = styled.div`
-  margin: 0 40px;
   width: 100%;
 `;
 
